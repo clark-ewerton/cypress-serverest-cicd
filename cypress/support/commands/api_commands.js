@@ -1,237 +1,122 @@
-import { faker } from '@faker-js/faker/locale/en'
+Cypress.Commands.add('api_loginAndSignUp', ( username, password, administrador) => {
+    cy.fixture('login_200').then((login_200) => {
+    cy.fixture('login_401').then((login_401) => {
+    cy.api_login(username, password, administrador).then((response) => {
+      //initially it's gonna try to use invalid credentials to login
+    if(response.status === 401){
+      // verifies if the structure of response body has the same keys as the fixture
+      expect(response.body).to.deep.equal(login_401);
 
-let accessToken
+      //if login fails, then create a new user
+      cy.fixture('createUser_201').then((createUser_201) => {
+      cy.api_createUser(username, password, administrador).then((response) => {
+        expect(response.status).to.eq(201);
+              // verifies if the structure of response body has the same keys as the fixture
+      expect(response.body).to.have.all.keys(Object.keys(createUser_201));
+      expect(response.body.message).to.eq("Cadastro realizado com sucesso");
+      expect(response.body._id).to.not.be.null
 
-/**
- * Ideally, the `setAccessTokenIfNotYetSet` function should be called just once,
- * right before the definition of all custom commands.
- * However, `cy.task` can only be called from within a test, which means that
- * calling it from outside of a test would result in a
- * `Cannot call cy.task() outside a running test.` error.
- *
- * This is why `setAccessTokenIfNotYetSet` is defined here as a function
- * that can be called by custom commands (or tests.)
- *
- * Since custom commands are called by test, calling the
- * `setAccessTokenIfNotYetSet` function inside them is like calling it
- * from inside the test that uses the command, making it a valid call.
- *
- * This is why every `api_*` command needs to call `setAccessTokenIfNotYetSet`
- * at the begining of their body.
- */
-const setAccessTokenIfNotYetSet = () => {
-  if (!accessToken) {
-    cy.task('getToken')
-      .then(token => {
-        accessToken = token
-      })
-  }
-}
+      const idUser = response.body._id;
 
-Cypress.Commands.add('api_createGroup', ({ name, path }) => {
-  setAccessTokenIfNotYetSet()
-  cy.request({
-    method: 'POST',
-    url: '/api/v4/groups',
-    headers: { 'Private-Token': accessToken },
-    body: { name, path }
-  })
-})
+      //then capture the id of the new user
+      cy.fixture('getUser_200').then((getUser_200) => {
+      cy.api_getUserById(idUser).then((response) => {
+        expect(response.status).to.eq(200);
+                      // verifies if the structure of response body has the same keys as the fixture
+      expect(response.body).to.have.all.keys(Object.keys(getUser_200));
+      expect(response.body.nome).to.not.null
+      expect(response.body.email).to.not.null
+      expect(response.body.password).to.not.null
+      expect(response.body.administrador).to.not.null
+      expect(response.body._id).to.not.null
 
-Cypress.Commands.add('api_getAllGroups', () => {
-  setAccessTokenIfNotYetSet()
-  cy.request({
-    method: 'GET',
-    url: '/api/v4/groups',
-    headers: { 'Private-Token': accessToken }
-  })
-})
-
-Cypress.Commands.add('api_deleteGroups', () => {
-  setAccessTokenIfNotYetSet()
-  cy.api_getAllGroups()
-    .its('body')
-    .each(({ id }) => {
-      cy.request({
-        method: 'DELETE',
-        url: `/api/v4/groups/${id}`,
-        headers: { 'Private-Token': accessToken }
-      })
-    })
-})
-
-Cypress.Commands.add('api_createProject', ({ name }) => {
-  setAccessTokenIfNotYetSet()
-  cy.request({
-    method: 'POST',
-    url: '/api/v4/projects',
-    headers: { 'Private-Token': accessToken },
-    body: { name }
-  })
-})
-
-Cypress.Commands.add('api_getAllProjects', () => {
-  setAccessTokenIfNotYetSet()
-  cy.request({
-    method: 'GET',
-    url: '/api/v4/projects',
-    headers: { 'Private-Token': accessToken }
-  })
-})
-
-Cypress.Commands.add('api_deleteProjects', () => {
-  setAccessTokenIfNotYetSet()
-  cy.api_getAllProjects()
-    .its('body')
-    .each(({ id }) => {
-      cy.request({
-        method: 'DELETE',
-        url: `/api/v4/projects/${id}`,
-        headers: { 'Private-Token': accessToken }
-      })
-    })
-})
-
-Cypress.Commands.add('api_createIssue', () => {
-  setAccessTokenIfNotYetSet()
-  cy.api_createProject({ name: `project-${faker.string.uuid()}` })
-    .then(({ body }) => {
-      cy.request({
-        method: 'POST',
-        url: `/api/v4/projects/${body.id}/issues`,
-        headers: { 'Private-Token': accessToken },
-        body: { title: `issue-${faker.string.uuid()}` }
-      })
-    })
-})
-
-Cypress.Commands.add('api_createProjectLabel', (projectId, label) => {
-  setAccessTokenIfNotYetSet()
-  cy.request({
-    method: 'POST',
-    url: `/api/v4/projects/${projectId}/labels`,
-    headers: { 'Private-Token': accessToken },
-    body: {
-      name: label.name,
-      color: label.color
+      //finally login using valid credentials based on the id captured on the last block
+      cy.api_loginAndSignUp(response.body.email, response.body.password, response.body._administrador)
+      });
+      });
+    });
+    });
+    }else{
+      expect(response.status).to.eq(200);
+     // verifies if the structure of response body has the same keys as the fixture
+      expect(response.body).to.have.all.keys(Object.keys(login_200));
+      expect(response.body.message).to.eq("Login realizado com sucesso");
     }
-  })
+  });
+});
+})
 })
 
-Cypress.Commands.add('api_createProjectMilestone', (projectId, milestone) => {
-  setAccessTokenIfNotYetSet()
+Cypress.Commands.add('api_login', ( 
+  username,
+  password) => {
   cy.request({
     method: 'POST',
-    url: `/api/v4/projects/${projectId}/milestones`,
-    headers: { 'Private-Token': accessToken },
-    body: { title: milestone.title }
-  })
-})
-
-Cypress.Commands.add('api_createUser', user => {
-  setAccessTokenIfNotYetSet()
-
-  let skipConfirmation = false
-
-  if (Object.prototype.hasOwnProperty.call(user, 'skip_confirmation')) {
-    skipConfirmation = user.skip_confirmation
-  }
-
-  cy.request({
-    method: 'POST',
-    url: '/api/v4/users',
-    headers: { 'Private-Token': accessToken },
+    url: `${Cypress.env('apiBaseUrl')}/login`,
+    headers: {
+      'Content-Type': 'application/json'
+    },
     body: {
-      email: user.email,
-      name: user.name,
-      username: user.username,
-      password: user.password,
-      skip_confirmation: skipConfirmation
-    }
+      email: username,
+      password: password,
+    },
+    failOnStatusCode: false
   })
 })
 
 Cypress.Commands.add('api_getAllUsers', () => {
-  setAccessTokenIfNotYetSet()
   cy.request({
     method: 'GET',
-    url: '/api/v4/users',
-    headers: { 'Private-Token': accessToken }
+    url: `${Cypress.env('apiBaseUrl')}/usuarios`,
+    //headers: { 'Private-Token': accessToken }
+  })
+})
+
+Cypress.Commands.add('api_getUserById', userId => {
+  cy.request({
+    method: 'GET',
+    url: `${Cypress.env('apiBaseUrl')}/usuarios/${userId}`,
+    //headers: { 'Private-Token': accessToken }
+  })
+})
+
+Cypress.Commands.add('api_createUser', (
+  username,
+  password,
+  administrador) => {
+  cy.request({
+    method: 'POST',
+    url: `${Cypress.env('apiBaseUrl')}/usuarios`,
+    //headers: { 'Private-Token': accessToken }
+    body: {
+      nome: username,
+      email: username,
+      password: password,
+      administrador: administrador,
+    }
   })
 })
 
 Cypress.Commands.add('api_deleteUser', userId => {
-  setAccessTokenIfNotYetSet()
   cy.request({
     method: 'DELETE',
-    url: `/api/v4/users/${userId}`,
-    headers: { 'Private-Token': accessToken }
+    url: `${Cypress.env('apiBaseUrl')}/usuarios/${userId}`,
+   // headers: { 'Private-Token': accessToken }
   })
 })
 
-Cypress.Commands.add('deleteAllUsersButRoot', () => {
-  setAccessTokenIfNotYetSet()
+Cypress.Commands.add('deleteAllUsersButRootAndTestClark', () => {
   cy.api_getAllUsers()
-    .its('body')
-    .each(({ username, id }) => {
-      if (username !== 'root') {
-        cy.api_deleteUser(id)
+    .then((response) => {
+      // A resposta é um objeto, então você acessa o array 'usuarios'
+      const usuarios = response.body.usuarios;
+      // Agora você pode iterar sobre o array de usuários
+      cy.wrap(usuarios).each((usuario) => {
+        if(usuario.nome.includes('testClark')){
+          cy.api_deleteUser(usuario._id)
           .its('status')
-          .should('equal', 204)
-      }
-    })
-})
-
-Cypress.Commands.add('api_updateUserWebsite', (userId, website) => {
-  setAccessTokenIfNotYetSet()
-  cy.request({
-    method: 'PUT',
-    url: `/api/v4/users/${userId}`,
-    headers: { 'Private-Token': accessToken },
-    body: { website_url: website }
-  })
-})
-
-Cypress.Commands.add('api_getAllBroadcastMessages', () => {
-  setAccessTokenIfNotYetSet()
-  cy.request({
-    method: 'GET',
-    url: '/api/v4/broadcast_messages',
-    headers: { 'Private-Token': accessToken }
-  })
-})
-
-Cypress.Commands.add('api_deleteBroadcastMessages', () => {
-  setAccessTokenIfNotYetSet()
-  cy.api_getAllBroadcastMessages()
-    .its('body')
-    .each(({ id }) => {
-      cy.request({
-        method: 'DELETE',
-        url: `/api/v4/broadcast_messages/${id}`,
-        headers: { 'Private-Token': accessToken }
-      })
-    })
-})
-
-Cypress.Commands.add('api_getAllSnippets', () => {
-  setAccessTokenIfNotYetSet()
-  cy.request({
-    method: 'GET',
-    url: '/api/v4/snippets',
-    headers: { 'Private-Token': accessToken }
-  })
-})
-
-Cypress.Commands.add('api_deleteSnippets', () => {
-  setAccessTokenIfNotYetSet()
-  cy.api_getAllSnippets()
-    .its('body')
-    .each(({ id }) => {
-      cy.request({
-        method: 'DELETE',
-        url: `/api/v4/snippets/${id}`,
-        headers: { 'Private-Token': accessToken }
-      })
-    })
+          .should('equal', 200)
+        }
+      });
+    });
 })
