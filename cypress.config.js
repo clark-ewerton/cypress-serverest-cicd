@@ -8,6 +8,8 @@ module.exports = defineConfig({
       return config
     }
   },
+   video: true,
+    screenshotOnRunFailure: true,
   retries: {
     runMode: 2,
     openMode: 0
