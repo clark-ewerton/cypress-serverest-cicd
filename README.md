@@ -44,6 +44,8 @@ npm install
 
 ```
 cypress/
+├── support/
+├── fixtures/
 ├── e2e/
 │   ├── api/
 │   │   └── authentication/
@@ -53,6 +55,9 @@ cypress/
 │           └── loginGUI.cy.js
 └── config.js
 ```
+- Support is the folder that contains all methods and locators that interacts with page/api
+- Fixture contains hard-coded response body json to do a quick contract test to api
+- E2E contains the spec files that triggers the automated tests
 
 ## Tests
 
