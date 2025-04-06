@@ -2,6 +2,8 @@
 
 Sample project to experiment with [Cypress](https://cypress.io) to test the ServeRest app.
 
+![Cypress Tests](https://github.com/clark-ewerton/cypress-serverest-challenge/actions/workflows/cypress.yml/badge.svg)
+
 ## Pre-requirements
 
 You also need to have [Node.js](https://nodejs.org/) and npm installed on your computer.
