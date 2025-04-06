@@ -34,8 +34,8 @@ jobs:
 
       - name: Run specific Cypress tests
         run: |
-          npx cypress run --spec "cypress/e2e/gui/authentication/loginAPI.cy.js"
-          npx cypress run --spec "cypress/e2e/api/authentication/loginGUI.cy.js"
+          npx cypress run --spec "cypress/e2e/gui/authentication/loginGUI.cy.js"
+          npx cypress run --spec "cypress/e2e/api/authentication/loginAPI.cy.js"
 
       - name: Upload Cypress Videos
         if: always()
