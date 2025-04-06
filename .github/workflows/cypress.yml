@@ -37,6 +37,18 @@ jobs:
           npx cypress run --spec "cypress/e2e/gui/authentication/loginGUI.cy.js"
           npx cypress run --spec "cypress/e2e/api/authentication/loginAPI.cy.js"
 
+      - name: Merge test reports
+        run: npm run report:merge
+
+      - name: Generate HTML report
+        run: npm run report:generate
+
+      - name: Upload test report as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-report
+          path: cypress/reports/mochawesome
+
       - name: Upload Cypress Videos
         if: always()
         uses: actions/upload-artifact@v4
