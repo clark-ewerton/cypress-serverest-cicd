@@ -10,7 +10,7 @@
 
 # Cypress ServeRest Challenge
 
-Sample project to experiment with [Cypress](https://cypress.io) to test the ServeRest app.
+Sample project to experiment with [Cypress](https://cypress.io) to test the ServeRest app along with GitHub Actions.
 
 ![Cypress Tests](https://github.com/clark-ewerton/cypress-serverest-challenge/actions/workflows/cypress.yml/badge.svg)
 ![Node.js](https://img.shields.io/badge/node.js-20.16.0-brightgreen)
@@ -47,10 +47,10 @@ cypress/
 ├── e2e/
 │   ├── api/
 │   │   └── authentication/
-│   │       └── loginGUI.cy.js
+│   │       └── loginAPI.cy.js
 │   └── gui/
 │       └── authentication/
-│           └── loginAPI.cy.js
+│           └── loginGUI.cy.js
 └── config.js
 ```
 
@@ -82,8 +82,8 @@ npm test
 2. Select **E2E Testing**;
 3. Select one of the available browsers (e.g., Electron), and click **Start**;
 4. Run the following test files manually:
-   - [`cypress/e2e/gui/authentication/loginAPI.cy.js`](./cypress/e2e/gui/authentication/loginAPI.cy.js)
-   - [`cypress/e2e/api/authentication/loginGUI.cy.js`](./cypress/e2e/api/authentication/loginGUI.cy.js)
+   - [`cypress/e2e/gui/authentication/loginGUI.cy.js`](./cypress/e2e/gui/authentication/loginGUI.cy.js)
+   - [`cypress/e2e/api/authentication/loginAPI.cy.js`](./cypress/e2e/api/authentication/loginAPI.cy.js)
 5. Wait for the tests to finish!
 
 ## CI/CD Pipeline
@@ -99,6 +99,18 @@ Videos and screenshots (in case of failures) are uploaded as artifacts in the pi
 - 🖼️ **Screenshots:** `cypress/screenshots/` (only on failure)
 
 Note: Artifacts are generated during pipeline execution and may not exist locally until tests are run.
+
+## Test Reports
+
+This project uses Mochawesome reporter for test reporting. After test execution:
+
+- Individual JSON reports are generated for each test spec
+
+- Reports are merged into a single file
+
+- A comprehensive HTML report is generated
+
+Reports are available in cypress/reports/mochawesome/ and are uploaded as artifacts in the CI/CD pipeline.
 
 ## Contributing
 
