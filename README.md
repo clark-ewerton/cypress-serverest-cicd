@@ -1,6 +1,5 @@
 ## Table of Contents
 
-- [About the Project](#about-the-project)
 - [Pre-requirements](#pre-requirements)
 - [Installation](#installation)
 - [Tests](#tests)
