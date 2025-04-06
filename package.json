@@ -15,8 +15,8 @@
     "test:gui:project:issue": "cypress run --spec 'cypress/e2e/gui/project/projectIssue.cy.js'",
     "test:gui:project:but:issue": "cypress run --spec 'cypress/e2e/gui/project/projectButIssue.cy.js'",
     "test:gui:all:but:project": "cypress run --spec 'cypress/e2e/gui/allButProject.cy.js'",
-    "report:merge": "mochawesome-merge cypress/reports/mochawesome/*.json -o cypress/reports/mochawesome/mochawesome.json",
-    "report:generate": "marge cypress/reports/mochawesome/mochawesome.json -f report -o cypress/reports/mochawesome"
+    "report:merge": "mochawesome-merge cypress/reports/mochawesome/*.json -o cypress/reports/mochawesome/merged_report.json",
+    "report:generate": "marge cypress/reports/mochawesome/merged_report.json -f report -o cypress/reports/mochawesome"
   },
   "standard": {
     "globals": [
