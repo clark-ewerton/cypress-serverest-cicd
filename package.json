@@ -52,6 +52,9 @@
     "esbuild": "^0.24.2",
     "eslint": "^8.57.1",
     "snazzy": "^9.0.0",
-    "standard": "^17.1.2"
+    "standard": "^17.1.2",
+    "mochawesome": "^7.x",
+    "mochawesome-merge": "^4.x",
+    "mochawesome-report-generator": "^6.x"
   }
 }
