@@ -12,7 +12,7 @@
 
 Sample project to experiment with [Cypress](https://cypress.io) to test the ServeRest app along with GitHub Actions.
 
-![Cypress Tests](https://github.com/clark-ewerton/cypress-serverest-challenge/actions/workflows/cypress.yml/badge.svg)
+[![Cypress Tests](https://github.com/clark-ewerton/cypress-serverest-challenge/actions/workflows/cypress.yml/badge.svg)](https://github.com/clark-ewerton/cypress-serverest-challenge/actions)
 ![Node.js](https://img.shields.io/badge/node.js-20.16.0-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
