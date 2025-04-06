@@ -49,6 +49,9 @@ jobs:
           name: cypress-report
           path: cypress/reports/mochawesome
 
+      - name: List report files
+        run: ls -l cypress/reports/mochawesome/
+
       - name: Upload Cypress Videos
         if: always()
         uses: actions/upload-artifact@v4
