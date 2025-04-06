@@ -17,7 +17,6 @@
     "test:gui:all:but:project": "cypress run --spec 'cypress/e2e/gui/allButProject.cy.js'",
     "report:merge": "mochawesome-merge cypress/reports/mochawesome/*.json -o cypress/reports/mochawesome/mochawesome.json",
     "report:generate": "marge cypress/reports/mochawesome/mochawesome.json -f report -o cypress/reports/mochawesome"
-
   },
   "standard": {
     "globals": [
@@ -51,10 +50,10 @@
     "cypress": "^14.1.0",
     "esbuild": "^0.24.2",
     "eslint": "^8.57.1",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.4.1",
+    "mochawesome-report-generator": "^6.2.0",
     "snazzy": "^9.0.0",
-    "standard": "^17.1.2",
-    "mochawesome": "^7.x",
-    "mochawesome-merge": "^4.x",
-    "mochawesome-report-generator": "^6.x"
+    "standard": "^17.1.2"
   }
 }
