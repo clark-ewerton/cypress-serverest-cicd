@@ -4,9 +4,9 @@ export class UserFactory {
   // Valid user
   static validUser() {
     return {
-      email: `${faker.name.firstName().toLowerCase()}@${faker.internet.domainName()}`,
-      name: `${faker.name.firstName()} ${faker.name.lastName()}`,
-      username: `${faker.name.firstName().toLowerCase()}${faker.internet.userName()}`,
+      email: `${randomName}testClark@example.com`,
+      name: `${randomName} ${faker.name.lastName().toLowerCase()} testClark`,
+      username: randomName + 'testClark',
       password: faker.internet.password(),
     };
   }
