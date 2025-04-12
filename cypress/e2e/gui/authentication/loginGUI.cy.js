@@ -1,4 +1,4 @@
-import { UserFactory } from '../factories/userFactory'; 
+import { UserFactory } from './factories/userFactory'; 
 
 describe('Login Functionalities GUI', () => {
   let newUser;
