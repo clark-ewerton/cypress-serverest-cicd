@@ -14,7 +14,7 @@ export class UserFactory {
   // User with invalid email format
   static invalidEmailUser() {
     return {
-      email: 'invalid-email', // Invalid email format
+      email: 'invalid-email@test', // Invalid email format
       name: `${faker.name.firstName()} ${faker.name.lastName()}`,
       username: faker.name.firstName().toLowerCase(),
       password: faker.internet.password(),
