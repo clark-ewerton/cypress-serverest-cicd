@@ -1,16 +1,11 @@
-import { faker } from '@faker-js/faker/locale/en';
+import { UserFactory } from '../factories/userFactory'; 
 
 describe('Login Functionalities GUI', () => {
   let newUser;
 
   beforeEach(() => {
-    const randomName = faker.name.firstName().toLowerCase();
-    newUser = {
-      email: `${randomName}testClark@example.com`,
-      name: `${randomName} ${faker.name.lastName().toLowerCase()} testClark`,
-      username: randomName + 'testClark',
-      password: faker.internet.password(),
-    };
+    
+    newUser = UserFactory.validUser();
 
     cy.deleteAllUsersButRootAndTestClark();
   });
