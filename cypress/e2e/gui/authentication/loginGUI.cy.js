@@ -1,4 +1,4 @@
-import { UserFactory } from './factories/userFactory'; 
+import { UserFactory } from 'cypress/factories/userFactory'; 
 
 describe('Login Functionalities GUI', () => {
   let newUser;
