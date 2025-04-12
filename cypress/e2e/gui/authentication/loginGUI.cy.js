@@ -30,7 +30,7 @@ describe('Login Functionalities GUI', () => {
   });
 
   it('Validate login throws an error when using invalid email format', () => {
-    const invalidEmail = "test@test";
-    cy.validateInvalidEmail(invalidEmail, newUser.password);
+    const invalidUser = UserFactory.invalidEmailUser();  // Using the user with invalid email
+    cy.validateInvalidEmail(invalidUser.email, newUser.password);
   });
 });
