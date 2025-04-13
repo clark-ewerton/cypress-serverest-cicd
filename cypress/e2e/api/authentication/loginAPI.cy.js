@@ -2,6 +2,7 @@ import { UserFactory } from '../../../factories/userFactory';
 
 describe('Login Functionalities API', () => {
   let login_401, login_400;
+  let newUser;
 
   beforeEach(() => {
     // load fixtures before testing
