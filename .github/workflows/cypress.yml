@@ -43,19 +43,27 @@ jobs:
       - name: Generate HTML report
         run: npm run report:generate
 
-      - name: List report files
-        run: ls -R ./public
-
       - name: Copy Cypress Artifacts and Reports to Public folder
         if: always()
         run: |
           mkdir -p ./public/videos
           mkdir -p ./public/screenshots
           mkdir -p ./public/mochawesome-report
+    
+          echo "Conteúdo de cypress/videos antes da cópia:"
+            ls -R cypress/videos || true
+    
           cp -r cypress/videos/* ./public/videos/ || true
+    
+          echo "Conteúdo de ./public/videos após a cópia:"
+            ls -R ./public/videos || true
+    
           cp -r cypress/screenshots/* ./public/screenshots/ || true
           cp -r cypress/reports/mochawesome/* ./public/ || true
           cp -r mochawesome-report/* ./public/mochawesome-report/ || true
+
+      - name: List report files
+        run: ls -R ./public
 
       - name: Deploy Mochawesome Report and Cypress Artifacts to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
