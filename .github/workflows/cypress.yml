@@ -36,15 +36,15 @@ jobs:
         run: |
           npx cypress run --spec "cypress/e2e/gui/authentication/loginGUI.cy.js" --reporter mochawesome --reporter-options reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true
           npx cypress run --spec "cypress/e2e/api/authentication/loginAPI.cy.js" --reporter mochawesome --reporter-options reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true
-      
-      - name: List report files
-        run: ls -R ./public
         
       - name: Merge test reports
         run: npm run report:merge
 
       - name: Generate HTML report
         run: npm run report:generate
+
+      - name: List report files
+        run: ls -R ./public
 
       - name: Copy Cypress Artifacts and Reports to Public folder
         if: always()
