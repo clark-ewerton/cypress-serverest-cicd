@@ -57,8 +57,8 @@ jobs:
         run: |
           mkdir -p ./public/videos
           mkdir -p ./public/screenshots
-          cp -r cypress/videos/* ./public/videos/
-          cp -r cypress/screenshots/* ./public/screenshots/
+          cp -r cypress/videos/* ./public/videos/ || true
+          cp -r cypress/screenshots/* ./public/screenshots/ || true
 
       - name: Deploy Mochawesome Report and Upload Cypress Artifacts to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
