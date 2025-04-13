@@ -9,6 +9,7 @@ export class UserFactory {
       name: `${randomName} ${faker.name.lastName().toLowerCase()} testClark`,
       username: randomName + 'testClark',
       password: faker.internet.password(),
+      administrador: "false",
     };
   }
 
