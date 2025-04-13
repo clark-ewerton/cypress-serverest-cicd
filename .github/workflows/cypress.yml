@@ -50,7 +50,8 @@ jobs:
           mkdir -p ./public/mochawesome-report
     
           echo "Copy mp4 videos and paste it into one folder"
-          cp -r cypress/videos/**/*.mp4 ./public/videos/ || true
+          ls -R cypress/videos/ || true
+          cp -r cypress/videos/*.mp4 ./public/videos/ || true
     
           echo "Content of ./public/videos after copy"
             ls -R ./public/videos || true
