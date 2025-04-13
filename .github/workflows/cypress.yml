@@ -57,6 +57,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./cypress/reports/mochawesome
+          keep_files: true  # Preserva os arquivos no diretório
 
       - name: Upload Cypress Videos
         if: always()
