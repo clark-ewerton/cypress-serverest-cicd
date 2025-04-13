@@ -7,7 +7,7 @@ describe('Login Functionalities GUI', () => {
     
     newUser = UserFactory.validUser();
 
-    cy.deleteAllUsersButRootAndTestClark();
+    cy.api_deleteAllUsersButRootAndTestClark();
   });
 
   it('Validate User Signup and Log in successfully', () => {
