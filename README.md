@@ -130,9 +130,10 @@ npm test
 
 ## CI/CD Pipeline
 
-This project uses **GitHub Actions** to run tests automatically on every push or pull request.
+This project uses **GitHub Actions** to run tests automatically on every push or pull request. The whole code can be found here: `cypress/workflows/cypress.yml`
 
 In this project CI is responsible for compile, build and run e2e automated test.
+
 CD is responsible to upload the reports and video files on GitHub Pages.
 
 Videos and screenshots (in case of failures) are uploaded as artifacts in the pipeline.
