@@ -38,7 +38,7 @@ class UserService {
 }
 
   getUserById(userId){
-     cy.request({
+     return cy.request({
     method: 'GET',
     url: `${Cypress.env('apiBaseUrl')}/usuarios/${userId}`,
     //headers: { 'Private-Token': accessToken }
@@ -102,8 +102,8 @@ loginAndSignUp(username, password, administrador) {
       expect(response.body._id).to.not.null
 
       //finally login using valid credentials based on the id captured on the last block
-      //cy.api_loginAndSignUp(response.body.email, response.body.password, response.body._administrador)
-        return getUserResponse;
+      this.loginAndSignUp(response.body.email, response.body.password, response.body._administrador)
+      //  return getUserResponse;
       });
       });
     });
