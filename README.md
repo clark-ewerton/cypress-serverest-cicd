@@ -1,20 +1,27 @@
-## Table of Contents
-
-- [Pre-requirements](#pre-requirements)
-- [Installation](#installation)
-- [Tests](#tests)
-- [User Flow test](#user-flow-test)
-- [Headless mode](#headless-mode)
-- [Interactive mode](#interactive-mode)
-- [License](#license)
-
 # Cypress ServeRest Challenge
 
-Sample project to experiment with [Cypress](https://cypress.io) to test the ServeRest app along with GitHub Actions.
+Sample project to experiment with [Cypress](https://cypress.io) to test the ServeRest app along with CI/CD using GitHub Actions and Pages.
 
 [![Cypress Tests](https://github.com/clark-ewerton/cypress-serverest-challenge/actions/workflows/cypress.yml/badge.svg)](https://github.com/clark-ewerton/cypress-serverest-challenge/actions)
 ![Node.js](https://img.shields.io/badge/node.js-20.16.0-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
+
+## Table of Contents
+
+- [Pre-requirements](#pre-requirements)
+- [Installation](#installation)
+- [Project Structure](#project-structure)
+- [Implemented Patterns](#implemented-patterns)
+- [Tests](#tests)
+- [User Flow test](#user-flow-test)
+- [Headless mode](#headless-mode)
+- [Interactive mode](#interactive-mode)
+- [CI/CD Pipeline](#cicd-pipeline)
+- [Test Artifacts](#test-artifacts)
+- [Test Reports](#test-reports)
+- [GitHub Pages](#github-pages)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Pre-requirements
 
@@ -44,8 +51,6 @@ npm install
 
 ```
 cypress/
-├── support/
-├── fixtures/
 ├── e2e/
 │   ├── api/
 │   │   └── authentication/
@@ -53,11 +58,41 @@ cypress/
 │   └── gui/
 │       └── authentication/
 │           └── loginGUI.cy.js
-└── config.js
+├── fixtures/
+├── support/
+│   ├── commands.js
+│   └── e2e.js
+|   └── context.js
+├── factories/
+│   └── userFactory.js
+├── services/
+│   └── userService.js
+cypress.config.js
+.gitHub/
+├── workflows/
+│   └── cypress.yml
+public/
+└── videos/
 ```
-- Support is the folder that contains all methods and locators that interacts with page/api
-- Fixture contains hard-coded response body json to do a quick contract test to api
-- E2E contains the spec files that triggers the automated tests
+- Support: Utilities like custom commands and common hooks
+- Fixture: Mocked data for testing (contract testing)
+- E2E: Test specifications
+- factories: Data factory layer for dynamic test data creation using Faker
+- services: Service layer to abstract API calls
+- context.js: Context configuration for reporting (attach videos to reports)
+- public/videos: Folder where test videos are copied for publishing on GitHub Pages
+
+## Implemented Patterns
+
+✅ Data Factory Pattern — Generates dynamic data for tests
+
+✅ Service Layer Pattern — Abstraction for API requests (For API)
+
+✅ Custom Commands — Simplifies and reuses test actions (For GUI)
+
+✅ Test Context Attachment — Attaches videos and artifacts to reports
+
+✅ GitHub Pages — Publishes test artifacts and videos for public access
 
 ## Tests
 
@@ -95,12 +130,14 @@ npm test
 
 This project uses **GitHub Actions** to run tests automatically on every push or pull request.
 
-Test results are visible in the repository as status checks.  
+In this project CI is responsible for compile, build and run e2e automated test.
+CD is responsible to upload the reports and video files on GitHub Pages.
+
 Videos and screenshots (in case of failures) are uploaded as artifacts in the pipeline.
 
 ## Test Artifacts
 
-- 🎥 **Videos:** `cypress/videos/`
+- 🎥 **Videos:** `cypress/videos/` (copied to `public/videos/` for GitHub Pages)
 - 🖼️ **Screenshots:** `cypress/screenshots/` (only on failure)
 
 Note: Artifacts are generated during pipeline execution and may not exist locally until tests are run.
@@ -115,7 +152,15 @@ This project uses Mochawesome reporter for test reporting. After test execution:
 
 - A comprehensive HTML report is generated
 
-Reports are available in cypress/reports/mochawesome/ and are uploaded as artifacts in the CI/CD pipeline.
+Reports are available in `cypress/reports/mochawesome/` and are uploaded as artifacts in the CI/CD pipeline.
+
+## GitHub Pages
+
+Test artifacts (videos and reports) are automatically published via GitHub Pages.
+
+You can access them at:
+
+https://clark-ewerton.github.io/cypress-serverest-challenge/report.html
 
 ## Contributing
 
