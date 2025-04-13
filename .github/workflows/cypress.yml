@@ -52,14 +52,6 @@ jobs:
       - name: List report files
         run: ls -l cypress/reports/mochawesome/
 
-      - name: Deploy Mochawesome Report and Upload Cypress Artifacts to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
-          user_name: 'github-actions[bot]'
-          user_email: 'github-actions[bot]@users.noreply.github.com'
-
       - name: Upload Cypress Artifacts to GitHub Pages
         if: always()
         run: |
@@ -68,3 +60,10 @@ jobs:
           cp -r cypress/videos/* ./public/videos/
           cp -r cypress/screenshots/* ./public/screenshots/
 
+      - name: Deploy Mochawesome Report and Upload Cypress Artifacts to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
