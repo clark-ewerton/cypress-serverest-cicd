@@ -51,7 +51,7 @@ jobs:
     
           echo "Copy mp4 videos and paste it into one folder"
           ls -R cypress/videos/ || true
-          cp -r cypress/videos/*.mp4 ./public/videos/ || true
+          cp -r cypress/videos/**/*.mp4 ./public/videos/ || true
     
           echo "Content of ./public/videos after copy"
             ls -R ./public/videos || true
