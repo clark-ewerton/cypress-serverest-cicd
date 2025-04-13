@@ -12,7 +12,7 @@ describe('Login Functionalities API', () => {
     newUser = UserFactory.validUser();
 
     // delete user that has name TestClark
-    cy.deleteAllUsersButRootAndTestClark();
+    cy.api_deleteAllUsersButRootAndTestClark();
   });
 
   it('Validate User Signup and Log in successfully', () => {
