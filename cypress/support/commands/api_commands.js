@@ -7,7 +7,7 @@ Cypress.Commands.add('api_loginAndSignUp', ( username, password, administrador) 
 Cypress.Commands.add('api_login', ( 
   username,
   password) => {
-  userService.login(username, password, administrador);
+  userService.login(username, password);
 })
 
 Cypress.Commands.add('api_getAllUsers', () => {
