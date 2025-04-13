@@ -2,8 +2,8 @@ import { faker } from '@faker-js/faker/locale/en';
 
 export class UserFactory {
   // Valid user
-  const randomName = faker.name.firstName().toLowerCase();
   static validUser() {
+      const randomName = faker.name.firstName().toLowerCase();
     return {
       email: `${randomName}testClark@example.com`,
       name: `${randomName} ${faker.name.lastName().toLowerCase()} testClark`,
