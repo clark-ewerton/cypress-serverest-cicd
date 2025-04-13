@@ -34,7 +34,7 @@ jobs:
 
       - name: Run specific Cypress tests
         run: |
-          npx cypress run --spec "cypress/e2e/gui/authentication/loginGUI.cy.js", "cypress/e2e/api/authentication/loginAPI.cy.js" --reporter mochawesome --reporter-options reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true
+          npx cypress run --spec "cypress/e2e/gui/authentication/loginGUI.cy.js, cypress/e2e/api/authentication/loginAPI.cy.js" --reporter mochawesome --reporter-options reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true
         
       - name: Merge test reports
         run: npm run report:merge
@@ -49,20 +49,15 @@ jobs:
           mkdir -p ./public/screenshots
           mkdir -p ./public/mochawesome-report
     
-          echo "Conteúdo de cypress/videos antes da cópia:"
-            ls -R cypress/videos || true
+          echo "Copy mp4 videos and paste it into one folder"
+          cp -r cypress/videos/**/*.mp4 ./public/videos/ || true
     
-          cp -r cypress/videos/* ./public/videos/ || true
-    
-          echo "Conteúdo de ./public/videos após a cópia:"
+          echo "Content of ./public/videos after copy"
             ls -R ./public/videos || true
     
           cp -r cypress/screenshots/* ./public/screenshots/ || true
           cp -r cypress/reports/mochawesome/* ./public/ || true
           cp -r mochawesome-report/* ./public/mochawesome-report/ || true
-
-      - name: List report files
-        run: ls -R ./public
 
       - name: Deploy Mochawesome Report and Cypress Artifacts to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
