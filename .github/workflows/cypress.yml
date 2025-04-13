@@ -36,6 +36,9 @@ jobs:
         run: |
           npx cypress run --spec "cypress/e2e/gui/authentication/loginGUI.cy.js,cypress/e2e/api/authentication/loginAPI.cy.js" --reporter mochawesome --reporter-options reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true
 
+      - name: List report files
+        run: ls -R ./public
+        
       - name: Merge test reports
         run: npm run report:merge
 
@@ -52,9 +55,6 @@ jobs:
           cp -r cypress/screenshots/* ./public/screenshots/ || true
           cp -r cypress/reports/mochawesome/* ./public/ || true
           cp -r mochawesome-report/* ./public/mochawesome-report/ || true
-
-      - name: List report files
-        run: ls -R ./public
 
       - name: Deploy Mochawesome Report and Cypress Artifacts to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
