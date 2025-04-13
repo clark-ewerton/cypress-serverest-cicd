@@ -26,7 +26,7 @@ Cypress.Commands.add('api_createUser', (
 })
 
 Cypress.Commands.add('api_deleteUser', userId => {
-  userService.deleteUser(userId);
+  userService.deleteUserById(userId);
 })
 
 Cypress.Commands.add('api_deleteAllUsersButRootAndTestClark', () => {
