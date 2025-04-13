@@ -60,9 +60,11 @@ cypress/
 │           └── loginGUI.cy.js
 ├── fixtures/
 ├── support/
-│   ├── commands.js
+│   ├── commands
+|   |      └── addContext.js
+|   |      └── api_commands.js
+|   |      └── gui_commands.js
 │   └── e2e.js
-|   └── context.js
 ├── factories/
 │   └── userFactory.js
 ├── services/
