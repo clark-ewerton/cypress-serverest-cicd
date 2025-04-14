@@ -1,4 +1,4 @@
-# Project to demonstrate knowledge in Cypress + Design Patterns + CI/CD (Github Actions and Pages)s
+# Project to demonstrate knowledge in Cypress + Design Patterns + CI/CD (Github Actions and Pages) + Mochawesome Reports
 
 Sample project to experiment with [Cypress](https://cypress.io) to test the ServeRest app along with CI/CD using GitHub Actions and Pages.
 
