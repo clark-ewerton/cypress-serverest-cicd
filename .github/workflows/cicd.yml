@@ -41,6 +41,13 @@ jobs:
       - name: Generate HTML report
         run: npm run report:generate
 
+      - name: Upload Cypress Screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -64,11 +71,10 @@ jobs:
           name: cypress-artifacts
           path: ./
 
-      - name: Verificar conteúdo da pasta após download
+      - name: Verifies content of files after download
         run: |
-          echo "Listando arquivos baixados:"
+          echo "Listing downloaded files:"
           ls -R ./cypress
-
 
       - name: Copy artifacts
         run: |
