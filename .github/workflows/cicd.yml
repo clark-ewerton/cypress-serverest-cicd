@@ -71,7 +71,7 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
-          name: "cypress-artifacts-${{ matrix.browser }}"
+          name: cypress-artifacts-${{ matrix.browser }}
           path: ./
 
       - name: Verifies content of files after download
