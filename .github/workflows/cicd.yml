@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Cypress CI CD Tests
 
 on:
   push:
@@ -11,12 +11,28 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     strategy:
       matrix:
         browser: [chrome, edge]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: 'gh-pages'
+
+      - name: Clean gh-pages branch
+        run: |
+          # Remove all files except .git
+          if [ -d ".git" ]; then
+            git rm -rf .
+            git clean -fxd
+            git commit --allow-empty -m "Complete cleanup of gh-pages"
+            git push origin gh-pages
+          else
+            echo "Branch gh-pages empty or not initialized"
+          fi
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -101,7 +117,7 @@ jobs:
           cp -r ./cypress/reports/mochawesome/* ./public/${{ matrix.browser }}/ || true
           cp -r ./cypress/mochawesome-report/* ./public/${{ matrix.browser }}/mochawesome-report/ || true
 
-      - name: Generate Index Page  # 👈 Aqui é o lugar ideal!
+      - name: Generate Index Page
         run: |
           mkdir -p ./public
           node generate-index.js
@@ -111,9 +127,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          keep_files: true
-         #destination_dir: ${{ matrix.browser }}
+          #keep_files: true
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
-
-
