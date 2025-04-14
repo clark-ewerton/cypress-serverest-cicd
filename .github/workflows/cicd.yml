@@ -34,12 +34,22 @@ jobs:
       - name: Run Cypress tests
         run: |
           npx cypress run --spec "cypress/e2e/gui/authentication/loginGUI.cy.js","cypress/e2e/api/authentication/loginAPI.cy.js" --reporter mochawesome --reporter-options reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true
-        
+
       - name: Merge test reports
         run: npm run report:merge
 
       - name: Generate HTML report
         run: npm run report:generate
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-artifacts
+          path: |
+            cypress/videos/
+            cypress/screenshots/
+            cypress/reports/mochawesome/
+            mochawesome-report/
 
   cd:
     runs-on: ubuntu-latest
@@ -48,6 +58,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: cypress-artifacts
+          path: ./cypress
+
       - name: Copy artifacts
         run: |
           mkdir -p ./public/videos
@@ -55,15 +71,15 @@ jobs:
           mkdir -p ./public/mochawesome-report
 
           echo "Copy mp4 videos and paste it into one folder"
-          ls -R cypress/videos/ || true
-          find cypress/videos/ -name "*.mp4" -exec cp {} ./public/videos/ \;
+          ls -R ./cypress/videos/ || true
+          find ./cypress/videos/ -name "*.mp4" -exec cp {} ./public/videos/ \;
 
           echo "Content of ./public/videos after copy"
           ls -R ./public/videos || true
 
-          cp -r cypress/screenshots/* ./public/screenshots/ || true
-          cp -r cypress/reports/mochawesome/* ./public/ || true
-          cp -r mochawesome-report/* ./public/mochawesome-report/ || true
+          cp -r ./cypress/screenshots/* ./public/screenshots/ || true
+          cp -r ./cypress/reports/mochawesome/* ./public/ || true
+          cp -r ./cypress/mochawesome-report/* ./public/mochawesome-report/ || true
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
