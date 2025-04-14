@@ -9,9 +9,8 @@ on:
       - main
 
 jobs:
-  cypress-run:
+  ci:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -32,7 +31,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run specific Cypress tests
+      - name: Run Cypress tests
         run: |
           npx cypress run --spec "cypress/e2e/gui/authentication/loginGUI.cy.js","cypress/e2e/api/authentication/loginAPI.cy.js" --reporter mochawesome --reporter-options reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true
         
@@ -42,25 +41,31 @@ jobs:
       - name: Generate HTML report
         run: npm run report:generate
 
-      - name: Copy Cypress Artifacts and Reports to Public folder
-        if: always()
+  cd:
+    runs-on: ubuntu-latest
+    needs: ci
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Copy artifacts
         run: |
           mkdir -p ./public/videos
           mkdir -p ./public/screenshots
           mkdir -p ./public/mochawesome-report
-    
+
           echo "Copy mp4 videos and paste it into one folder"
           ls -R cypress/videos/ || true
           find cypress/videos/ -name "*.mp4" -exec cp {} ./public/videos/ \;
-    
+
           echo "Content of ./public/videos after copy"
-            ls -R ./public/videos || true
-    
+          ls -R ./public/videos || true
+
           cp -r cypress/screenshots/* ./public/screenshots/ || true
           cp -r cypress/reports/mochawesome/* ./public/ || true
           cp -r mochawesome-report/* ./public/mochawesome-report/ || true
 
-      - name: Deploy Mochawesome Report and Cypress Artifacts to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
