@@ -2,7 +2,8 @@
 
 Sample project to experiment with [Cypress](https://cypress.io) to test the ServeRest app along with CI/CD using GitHub Actions and Pages.
 
-[![Cypress Tests](https://github.com/clark-ewerton/cypress-serverest-challenge/actions/workflows/cypress.yml/badge.svg)](https://github.com/clark-ewerton/cypress-serverest-challenge/actions)
+[![GitHub Actions Status](https://github.com/clark-ewerton/cypress-serverest-cicd/workflows/Tests/badge.svg)](https://github.com/clark-ewerton/cypress-serverest-cicd/actions)
+[![Pages Status](https://img.shields.io/badge/GitHub%20Pages-Online-green)](https://clark-ewerton.github.io/cypress-serverest-cicd/)
 ![Node.js](https://img.shields.io/badge/node.js-20.16.0-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
@@ -138,6 +139,28 @@ CD is responsible to upload the reports and video files on GitHub Pages.
 
 Videos and screenshots (in case of failures) are uploaded as artifacts in the pipeline.
 
+## 🔄 Multi-Navegador
+
+O workflow testa automaticamente em:
+- Google Chrome (latest)
+- Microsoft Edge (latest)
+
+*Implementado via GitHub Actions Matrix:*
+```yaml
+strategy:
+  matrix:
+    browser: [chrome, edge]
+
+```mermaid
+graph TD
+  A[Início] --> B[Testes no Chrome]
+  A --> C[Testes no Edge]
+  B --> D[Deploy Chrome]
+  C --> E[Deploy Edge]
+  D --> F[Dashboard]
+  E --> F
+```
+
 ## Test Artifacts
 
 - 🎥 **Videos:** `cypress/videos/` (copied to `public/videos/` for GitHub Pages)
@@ -161,9 +184,22 @@ Reports are available in `cypress/reports/mochawesome/` and are uploaded as arti
 
 Test artifacts (videos and reports) are automatically published via GitHub Pages.
 
+After workflow deploys reports into gh-pages branch, it's gonna have this type of structure:
+
+```
+└── /
+├── index.html # Report Dashboard
+├── chrome/ # Complete Report (Chrome)
+│ ├── videos/ # Test video records
+│ └── report.html # Mochawesome Report
+└── edge/ # Complete Report (Edge)
+├── videos/
+└── report.html
+```
+
 You can access them at:
 
-https://clark-ewerton.github.io/cypress-serverest-cicd/report.html
+https://clark-ewerton.github.io/cypress-serverest-cicd/index.html
 
 ## Contributing
 
