@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const browsers = ['chrome', 'edge'];
 const reportsDir = './public';
+const base = 'cypress-serverest-cicd';
 
 // HTML Template
 const html = `
@@ -22,9 +23,9 @@ const html = `
   ${browsers.map(browser => `
     <div class="browser">
       <h2>${browser.toUpperCase()}</h2>
-      <a href="/${browser}/report.html" target="_blank">Ver Relatório Completo</a><br>
-      <a href="/${browser}/videos/" target="_blank">Vídeos</a> | 
-      <a href="/${browser}/screenshots/" target="_blank">Screenshots</a>
+      <a href="/${base}/${browser}/report.html" target="_blank">Ver Relatório Completo</a><br>
+      <a href="/${base}/${browser}/videos/" target="_blank">Vídeos</a> | 
+      <a href="/${base}/${browser}/screenshots/" target="_blank">Screenshots</a>
     </div>
   `).join('')}
   <p>Updated: ${new Date().toLocaleString()}</p>
