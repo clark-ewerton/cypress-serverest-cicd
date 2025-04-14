@@ -84,20 +84,20 @@ jobs:
 
       - name: Copy artifacts
         run: |
-          mkdir -p ./public/videos
-          mkdir -p ./public/screenshots
-          mkdir -p ./public/mochawesome-report
+          mkdir -p ./public/${{ matrix.browser }}/videos
+          mkdir -p ./public/${{ matrix.browser }}/screenshots
+          mkdir -p ./public/${{ matrix.browser }}/mochawesome-report
 
           echo "Copy mp4 videos and paste it into one folder"
           ls -R ./cypress/videos/ || true
-          find ./cypress/videos/ -name "*.mp4" -exec cp {} ./public/videos/ \;
+          find ./cypress/videos/ -name "*.mp4" -exec cp {} ./public/${{ matrix.browser }}/videos/ \;
 
           echo "Content of ./public/videos after copy"
-          ls -R ./public/videos || true
+          ls -R ./public/${{ matrix.browser }}/videos || true
 
-          cp -r ./cypress/screenshots/* ./public/screenshots/ || true
-          cp -r ./cypress/reports/mochawesome/* ./public/ || true
-          cp -r ./cypress/mochawesome-report/* ./public/mochawesome-report/ || true
+          cp -r ./cypress/screenshots/* ./public/${{ matrix.browser }}/screenshots/ || true
+          cp -r ./cypress/reports/mochawesome/* ./public/${{ matrix.browser }}/ || true
+          cp -r ./cypress/mochawesome-report/* ./public/${{ matrix.browser }}/mochawesome-report/ || true
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
