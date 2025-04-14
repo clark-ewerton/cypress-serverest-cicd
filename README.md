@@ -1,4 +1,4 @@
-# Cypress ServeRest Challenge
+# Cypress ServeRest Challenges
 
 Sample project to experiment with [Cypress](https://cypress.io) to test the ServeRest app along with CI/CD using GitHub Actions and Pages.
 
