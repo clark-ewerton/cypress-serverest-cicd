@@ -67,6 +67,8 @@ jobs:
     strategy:
       matrix:
         browser: [chrome, edge]
+      # Force sequential execution
+      max-parallel: 1 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -103,13 +105,6 @@ jobs:
         run: |
           echo "Content of ./public/${{ matrix.browser }} before deploy:"
           ls -R ./public/${{ matrix.browser }} || true
-
-          # Passo adicional para garantir que a branch gh-pages está atualizada
-      - name: Pull the latest gh-pages branch
-        run: |
-          git fetch origin gh-pages
-          git checkout gh-pages
-          git pull origin gh-pages
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
