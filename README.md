@@ -141,24 +141,27 @@ Videos and screenshots (in case of failures) are uploaded as artifacts in the pi
 
 ## 🔄 Multi-Navegador
 
-O workflow testa automaticamente em:
+WorkFlow is prepared to run e2e test on multiple browsers such as:
 - Google Chrome (latest)
 - Microsoft Edge (latest)
 
-*Implementado via GitHub Actions Matrix:*
+*Implementing via GitHub Actions Matrix:*
 ```yaml
 strategy:
   matrix:
     browser: [chrome, edge]
+```
 
 ```mermaid
 graph TD
-  A[Início] --> B[Testes no Chrome]
-  A --> C[Testes no Edge]
-  B --> D[Deploy Chrome]
-  C --> E[Deploy Edge]
-  D --> F[Dashboard]
-  E --> F
+  A[Begin] --> B[Clean up gh-pages branch before running e2e tests]
+  B --> C[Tests on Chrome]
+  B --> D[Tests on Edge]
+  C --> E[Deploy Chrome reports]
+  D --> E[Deploy Chrome reports]
+  E --> F[Deploy Edge reports]
+  F --> G[Final Report Dashboard]
+  G --> H[End]
 ```
 
 ## Test Artifacts
