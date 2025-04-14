@@ -107,23 +107,4 @@ jobs:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
 
-      - name: Prepare Chrome artifacts
-        run: |
-          mkdir -p ./public/chrome
-          cp -r ./downloaded/cypress/videos/* ./public/chrome/
-          cp -r ./downloaded/cypress/screenshots/* ./public/chrome/
-          cp -r ./downloaded/cypress/reports/mochawesome/* ./public/chrome/
-          cp -r ./downloaded/cypress/mochawesome-report/* ./public/chrome/
-
-      - name: Prepare Edge artifacts
-        run: |
-          mkdir -p ./public/edge
-          cp -r ./downloaded/cypress/videos/* ./public/edge/
-          cp -r ./downloaded/cypress/screenshots/* ./public/edge/
-          cp -r ./downloaded/cypress/reports/mochawesome/* ./public/edge/
-          cp -r ./downloaded/cypress/mochawesome-report/* ./public/edge/
-
-
-
-
 
