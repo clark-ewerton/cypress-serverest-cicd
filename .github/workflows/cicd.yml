@@ -11,32 +11,12 @@ on:
 jobs:
   ci:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     strategy:
       matrix:
         browser: [chrome, edge]
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          ref: 'gh-pages'
-
-      - name: Clean gh-pages branch
-        run: |
-          # Configuração segura do Git
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-    
-          # Remove all files except .git
-          if [ -d ".git" ]; then
-            git rm -rf . || true
-            git clean -fxd
-            git commit --allow-empty -m "Complete cleanup of gh-pages"
-            git push origin gh-pages
-          else
-            echo "Branch gh-pages empty or not initialized"
-          fi
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
