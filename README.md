@@ -163,7 +163,7 @@ Test artifacts (videos and reports) are automatically published via GitHub Pages
 
 You can access them at:
 
-https://clark-ewerton.github.io/cypress-serverest-challenge/report.html
+https://clark-ewerton.github.io/cypress-serverest-cicd/report.html
 
 ## Contributing
 
