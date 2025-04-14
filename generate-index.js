@@ -34,7 +34,7 @@ const html = `
       <a href="/${base}/${browser}/report.html" target="_blank">See Complete Report</a><br>
     </div>
   `).join('')}
-  <p>Updated: ${updatetime} (Brasil Time Zone)</p>
+  <p>Updated: ${updateTime} (Brasil Time Zone)</p>
 </body>
 </html>
 `;
