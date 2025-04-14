@@ -148,10 +148,10 @@ graph TD
   A[Begin] --> B[Clean up gh-pages branch before running e2e tests]
   B --> C[Tests on Chrome]
   B --> D[Tests on Edge]
-  C --> E[Deploy Chrome reports]
-  D --> E[Deploy Chrome reports]
-  E --> F[Deploy Edge reports]
-  F --> G[Final Report Dashboard]
+  C --> E[Deploy Chrome reports - GitHub Pages]
+  D --> E[Deploy Chrome reports - GitHub Pages]
+  E --> F[Deploy Edge reports - GitHub Pages]
+  F --> G[Final Report Dashboard - GitHub Pages]
   G --> H[End]
 ```
 
