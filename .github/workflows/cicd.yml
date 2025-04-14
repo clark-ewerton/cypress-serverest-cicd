@@ -101,10 +101,10 @@ jobs:
           cp -r ./cypress/reports/mochawesome/* ./public/${{ matrix.browser }}/ || true
           cp -r ./cypress/mochawesome-report/* ./public/${{ matrix.browser }}/mochawesome-report/ || true
 
-      - name: Verifies content before deploy
+      - name: Generate Index Page  # 👈 Aqui é o lugar ideal!
         run: |
-          echo "Content of ./public/${{ matrix.browser }} before deploy:"
-          ls -R ./public/${{ matrix.browser }} || true
+          mkdir -p ./public
+          node generate-index.js
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
