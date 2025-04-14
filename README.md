@@ -202,9 +202,9 @@ After workflow deploys reports into gh-pages branch, it's gonna have this type o
 └── report.html
 ```
 
-You can access them at:
+Access automatically generated test reports and artifacts:
 
-- [Full Report](https://clark-ewerton.github.io/cypress-serverest-cicd/index.html)
+[![Reports Preview](https://img.shields.io/badge/📊_Live_Reports-Online-success)](https://clark-ewerton.github.io/cypress-serverest-cicd/)
 
 ## Contributing
 
