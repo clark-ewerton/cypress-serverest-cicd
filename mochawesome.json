@@ -5,9 +5,9 @@
     "passes": 3,
     "pending": 0,
     "failures": 0,
-    "start": "2025-04-14T14:39:22.025Z",
-    "end": "2025-04-14T14:39:31.399Z",
-    "duration": 9374,
+    "start": "2025-04-14T14:45:07.824Z",
+    "end": "2025-04-14T14:45:17.559Z",
+    "duration": 9735,
     "testsRegistered": 3,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "45a3090e-e3e7-470e-955f-67f083bdf42d",
+      "uuid": "3674d948-c1e7-4922-93ce-577390274415",
       "title": "",
       "fullFile": "cypress/e2e/gui/authentication/loginGUI.cy.js",
       "file": "cypress/e2e/gui/authentication/loginGUI.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "bb1f7783-c0c0-4e5f-913a-85fe2a8095e9",
+          "uuid": "69f6ac1c-6123-47c2-8155-f135b5269c4d",
           "title": "Login Functionalities GUI",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Validate User Signup and Log in successfully",
               "fullTitle": "Login Functionalities GUI Validate User Signup and Log in successfully",
               "timedOut": null,
-              "duration": 6763,
+              "duration": 7106,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -47,8 +47,8 @@
               "context": "\"videos/loginGUI.cy.js.mp4\"",
               "code": "/**\n * O comando `gui_login_or_signup_and_login` já valida que o login foi realizado,\n * garantindo que a sessão foi criada corretamente.\n * \n * Por isso, este teste não precisa de assertivas adicionais.\n */\ncy.gui_login_or_signup_and_login(newUser.email, newUser.password);\n// Valida o logout\ncy.gui_logout();\ncy.url().should('include', '/login');\ncy.get('input[name=\"email\"]').should('be.visible');",
               "err": {},
-              "uuid": "4fbf0172-f920-41a1-ac7f-583b4e0e6d6f",
-              "parentUUID": "bb1f7783-c0c0-4e5f-913a-85fe2a8095e9",
+              "uuid": "160130d4-e986-44a6-bd75-14392f7c2562",
+              "parentUUID": "69f6ac1c-6123-47c2-8155-f135b5269c4d",
               "isHook": false,
               "skipped": false
             },
@@ -56,7 +56,7 @@
               "title": "Validate login throws an error when using invalid credentials",
               "fullTitle": "Login Functionalities GUI Validate login throws an error when using invalid credentials",
               "timedOut": null,
-              "duration": 1371,
+              "duration": 1405,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -65,8 +65,8 @@
               "context": "\"videos/loginGUI.cy.js.mp4\"",
               "code": "cy.validateInvalidCredentials(newUser.email, newUser.password);",
               "err": {},
-              "uuid": "f80d84c6-e506-4d06-9cc0-2bb447a846ba",
-              "parentUUID": "bb1f7783-c0c0-4e5f-913a-85fe2a8095e9",
+              "uuid": "55930ccb-4ebc-4e84-8bd2-49fab339d70c",
+              "parentUUID": "69f6ac1c-6123-47c2-8155-f135b5269c4d",
               "isHook": false,
               "skipped": false
             },
@@ -74,7 +74,7 @@
               "title": "Validate login throws an error when using invalid email format",
               "fullTitle": "Login Functionalities GUI Validate login throws an error when using invalid email format",
               "timedOut": null,
-              "duration": 1081,
+              "duration": 1076,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -83,22 +83,22 @@
               "context": "\"videos/loginGUI.cy.js.mp4\"",
               "code": "const invalidUser = _userFactory.UserFactory.invalidEmailUser(); // Using the user with invalid email\ncy.validateInvalidEmail(invalidUser.email, newUser.password);",
               "err": {},
-              "uuid": "e9c3ef88-f2bd-43d6-91c7-2f9e2f5a1986",
-              "parentUUID": "bb1f7783-c0c0-4e5f-913a-85fe2a8095e9",
+              "uuid": "d652a585-efcc-48ab-accf-c084b7b8d316",
+              "parentUUID": "69f6ac1c-6123-47c2-8155-f135b5269c4d",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "4fbf0172-f920-41a1-ac7f-583b4e0e6d6f",
-            "f80d84c6-e506-4d06-9cc0-2bb447a846ba",
-            "e9c3ef88-f2bd-43d6-91c7-2f9e2f5a1986"
+            "160130d4-e986-44a6-bd75-14392f7c2562",
+            "55930ccb-4ebc-4e84-8bd2-49fab339d70c",
+            "d652a585-efcc-48ab-accf-c084b7b8d316"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 9215,
+          "duration": 9587,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
