@@ -4,6 +4,14 @@ const fs = require('fs');
 const browsers = ['chrome', 'edge'];
 const reportsDir = './public';
 const base = 'cypress-serverest-cicd';
+const options = {
+  timeZone: 'America/Sao_Paulo',
+  hour12: false,
+  dateStyle: 'short',
+  timeStyle: 'medium'
+};
+
+const updateTime = new Date().toLocaleString('pt-BR', options);
 
 // HTML Template
 const html = `
@@ -23,12 +31,10 @@ const html = `
   ${browsers.map(browser => `
     <div class="browser">
       <h2>${browser.toUpperCase()}</h2>
-      <a href="/${base}/${browser}/report.html" target="_blank">Ver Relatório Completo</a><br>
-      <a href="/${base}/${browser}/videos/" target="_blank">Vídeos</a> | 
-      <a href="/${base}/${browser}/screenshots/" target="_blank">Screenshots</a>
+      <a href="/${base}/${browser}/report.html" target="_blank">See Complete Report</a><br>
     </div>
   `).join('')}
-  <p>Updated: ${new Date().toLocaleString()}</p>
+  <p>Updated: <span id="update-time"></span> Brasil Time Zone</p>
 </body>
 </html>
 `;
