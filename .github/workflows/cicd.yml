@@ -24,6 +24,10 @@ jobs:
 
       - name: Clean gh-pages branch
         run: |
+          # Configuração segura do Git
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+    
           # Remove all files except .git
           if [ -d ".git" ]; then
             git rm -rf .
