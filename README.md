@@ -18,9 +18,9 @@ Sample project to experiment with [Cypress](https://cypress.io) to test the Serv
 - [Headless mode](#headless-mode)
 - [Interactive mode](#interactive-mode)
 - [CI/CD Pipeline](#cicd-pipeline)
+- [Multi-Browser](#multi-browser)
 - [Test Artifacts](#test-artifacts)
 - [Test Reports](#test-reports)
-- [GitHub Pages](#github-pages)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -155,7 +155,7 @@ graph TD
   G --> H[End]
 ```
 
-## 🔄 Multi-Navegador
+## Multi-Browser
 
 WorkFlow is prepared to run e2e test on multiple browsers such as:
 - Google Chrome (latest)
