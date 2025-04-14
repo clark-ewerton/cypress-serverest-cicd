@@ -2,7 +2,7 @@
 
 Sample project to experiment with [Cypress](https://cypress.io) to test the ServeRest app along with CI/CD using GitHub Actions and Pages.
 
-[![GitHub Actions Status](https://github.com/clark-ewerton/cypress-serverest-cicd/workflows/Tests/badge.svg)](https://github.com/clark-ewerton/cypress-serverest-cicd/actions)
+[![GitHub Actions Status](https://github.com/clark-ewerton/cypress-serverest-cicd/workflows/cicd.yml/badge.svg)](https://github.com/clark-ewerton/cypress-serverest-cicd/actions)
 [![Pages Status](https://img.shields.io/badge/GitHub%20Pages-Online-green)](https://clark-ewerton.github.io/cypress-serverest-cicd/)
 ![Node.js](https://img.shields.io/badge/node.js-20.16.0-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
@@ -183,6 +183,8 @@ This project uses Mochawesome reporter for test reporting. After test execution:
 
 Reports are available in `cypress/reports/mochawesome/` and are uploaded as artifacts in the CI/CD pipeline.
 
+Quick Note: it generates separately for each browser instance
+
 ## GitHub Pages
 
 Test artifacts (videos and reports) are automatically published via GitHub Pages.
@@ -202,7 +204,7 @@ After workflow deploys reports into gh-pages branch, it's gonna have this type o
 
 You can access them at:
 
-https://clark-ewerton.github.io/cypress-serverest-cicd/index.html
+- [Dashboard Principal](https://clark-ewerton.github.io/cypress-serverest-cicd/index.html)
 
 ## Contributing
 
