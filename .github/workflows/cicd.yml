@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  cleanup:
+  Clean_artifacts_from_gh-pages_branch:
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -35,9 +35,9 @@ jobs:
             echo "Branch gh-pages empty or not initialized"
           fi
 
-  ci:
+  CI:
     runs-on: ubuntu-latest
-    needs: cleanup
+    needs: Clean_artifacts_from_gh-pages_branch
     strategy:
       matrix:
         browser: [chrome, edge]
@@ -90,9 +90,9 @@ jobs:
             cypress/reports/mochawesome/
             mochawesome-report/
 
-  cd:
+  CD:
     runs-on: ubuntu-latest
-    needs: ci
+    needs: CI
     strategy:
       matrix:
         browser: [chrome, edge]
@@ -140,6 +140,6 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          #keep_files: true
+          keep_files: true
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
