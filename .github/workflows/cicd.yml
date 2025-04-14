@@ -64,6 +64,12 @@ jobs:
           name: cypress-artifacts
           path: ./cypress
 
+      - name: Verificar conteúdo da pasta após download
+        run: |
+          echo "Listando arquivos baixados:"
+          ls -R ./cypress
+
+
       - name: Copy artifacts
         run: |
           mkdir -p ./public/videos
