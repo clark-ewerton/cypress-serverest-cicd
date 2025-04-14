@@ -1,0 +1,143 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 3,
+    "passes": 3,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-04-14T18:52:52.124Z",
+    "end": "2025-04-14T18:53:02.049Z",
+    "duration": 9925,
+    "testsRegistered": 3,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "84b23f16-1991-4bd4-aa59-53d153967c83",
+      "title": "",
+      "fullFile": "cypress/e2e/gui/authentication/loginGUI.cy.js",
+      "file": "cypress/e2e/gui/authentication/loginGUI.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "cf035cfc-a0df-425e-b493-ea3720e47219",
+          "title": "Login Functionalities GUI",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Validate User Signup and Log in successfully",
+              "fullTitle": "Login Functionalities GUI Validate User Signup and Log in successfully",
+              "timedOut": null,
+              "duration": 6696,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": "\"videos/loginGUI.cy.js.mp4\"",
+              "code": "/**\n * O comando `gui_login_or_signup_and_login` já valida que o login foi realizado,\n * garantindo que a sessão foi criada corretamente.\n * \n * Por isso, este teste não precisa de assertivas adicionais.\n */\ncy.gui_login_or_signup_and_login(newUser.email, newUser.password);\n// Valida o logout\ncy.gui_logout();\ncy.url().should('include', '/login');\ncy.get('input[name=\"email\"]').should('be.visible');",
+              "err": {},
+              "uuid": "131fa9e6-0ada-4e12-8321-5023a536599a",
+              "parentUUID": "cf035cfc-a0df-425e-b493-ea3720e47219",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validate login throws an error when using invalid credentials",
+              "fullTitle": "Login Functionalities GUI Validate login throws an error when using invalid credentials",
+              "timedOut": null,
+              "duration": 1601,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": "\"videos/loginGUI.cy.js.mp4\"",
+              "code": "cy.validateInvalidCredentials(newUser.email, newUser.password);",
+              "err": {},
+              "uuid": "9c6baf77-78d6-46c6-a415-8c55a8dcc3c9",
+              "parentUUID": "cf035cfc-a0df-425e-b493-ea3720e47219",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Validate login throws an error when using invalid email format",
+              "fullTitle": "Login Functionalities GUI Validate login throws an error when using invalid email format",
+              "timedOut": null,
+              "duration": 1474,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": "\"videos/loginGUI.cy.js.mp4\"",
+              "code": "const invalidUser = _userFactory.UserFactory.invalidEmailUser(); // Using the user with invalid email\ncy.validateInvalidEmail(invalidUser.email, newUser.password);",
+              "err": {},
+              "uuid": "a85c0d26-30db-4373-a0f8-b09cfbad6f23",
+              "parentUUID": "cf035cfc-a0df-425e-b493-ea3720e47219",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "131fa9e6-0ada-4e12-8321-5023a536599a",
+            "9c6baf77-78d6-46c6-a415-8c55a8dcc3c9",
+            "a85c0d26-30db-4373-a0f8-b09cfbad6f23"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 9771,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports/mochawesome",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
