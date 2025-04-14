@@ -30,7 +30,7 @@ jobs:
     
           # Remove all files except .git
           if [ -d ".git" ]; then
-            git rm -rf .
+            git rm -rf . || true
             git clean -fxd
             git commit --allow-empty -m "Complete cleanup of gh-pages"
             git push origin gh-pages
