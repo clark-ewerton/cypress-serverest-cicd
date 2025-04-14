@@ -99,6 +99,11 @@ jobs:
           cp -r ./cypress/reports/mochawesome/* ./public/${{ matrix.browser }}/ || true
           cp -r ./cypress/mochawesome-report/* ./public/${{ matrix.browser }}/mochawesome-report/ || true
 
+      - name: Verifies content before deploy
+        run: |
+          echo "Content of ./public/${{ matrix.browser }} before deploy:"
+          ls -R ./public/${{ matrix.browser }} || true
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
