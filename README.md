@@ -71,9 +71,10 @@ cypress/
 ├── services/
 │   └── userService.js
 cypress.config.js
+generate-index.js
 .gitHub/
 ├── workflows/
-│   └── cypress.yml
+│   └── cicd.yml
 public/
 └── videos/
 ```
@@ -84,6 +85,7 @@ public/
 - services: Service layer to abstract API calls
 - context.js: Context configuration for reporting (attach videos to reports)
 - public/videos: Folder where test videos are copied for publishing on GitHub Pages
+- generate-index.js: it's gonna generate an index.thml file into gh-pages to consolidate all the reports per browser
 
 ## Implemented Patterns
 
@@ -139,18 +141,7 @@ CD is responsible to upload the reports and video files on GitHub Pages.
 
 Videos and screenshots (in case of failures) are uploaded as artifacts in the pipeline.
 
-## 🔄 Multi-Navegador
-
-WorkFlow is prepared to run e2e test on multiple browsers such as:
-- Google Chrome (latest)
-- Microsoft Edge (latest)
-
-*Implementing via GitHub Actions Matrix:*
-```yaml
-strategy:
-  matrix:
-    browser: [chrome, edge]
-```
+See below the flow that the pipeline is doing:
 
 ```mermaid
 graph TD
@@ -164,9 +155,22 @@ graph TD
   G --> H[End]
 ```
 
+## 🔄 Multi-Navegador
+
+WorkFlow is prepared to run e2e test on multiple browsers such as:
+- Google Chrome (latest)
+- Microsoft Edge (latest)
+
+*Implementing via GitHub Actions Matrix:*
+```yaml
+strategy:
+  matrix:
+    browser: [chrome, edge]
+```
+
 ## Test Artifacts
 
-- 🎥 **Videos:** `cypress/videos/` (copied to `public/videos/` for GitHub Pages)
+- 🎥 **Videos:** `cypress/videos/` (copied to `public/chrome/videos/` or `public/edge/videos/` for GitHub Pages)
 - 🖼️ **Screenshots:** `cypress/screenshots/` (only on failure)
 
 Note: Artifacts are generated during pipeline execution and may not exist locally until tests are run.
@@ -182,10 +186,6 @@ This project uses Mochawesome reporter for test reporting. After test execution:
 - A comprehensive HTML report is generated
 
 Reports are available in `cypress/reports/mochawesome/` and are uploaded as artifacts in the CI/CD pipeline.
-
-Quick Note: it generates separately for each browser instance
-
-## GitHub Pages
 
 Test artifacts (videos and reports) are automatically published via GitHub Pages.
 
@@ -204,7 +204,7 @@ After workflow deploys reports into gh-pages branch, it's gonna have this type o
 
 You can access them at:
 
-- [Dashboard Principal](https://clark-ewerton.github.io/cypress-serverest-cicd/index.html)
+- [Full Report](https://clark-ewerton.github.io/cypress-serverest-cicd/index.html)
 
 ## Contributing
 
