@@ -12,13 +12,13 @@
     "hasOther": false,
     "skipped": 0,
     "hasSkipped": false,
-    "start": "2025-04-14T16:15:54.402Z",
-    "end": "2025-04-14T16:16:07.422Z",
-    "duration": 13020
+    "start": "2025-04-14T16:30:37.560Z",
+    "end": "2025-04-14T16:30:51.423Z",
+    "duration": 13863
   },
   "results": [
     {
-      "uuid": "f2ff2964-03a9-4152-9ee5-9fcb45fcdb7d",
+      "uuid": "1ca21373-c671-435c-8a4b-3b9a21c94846",
       "title": "",
       "fullFile": "cypress/e2e/gui/authentication/loginGUI.cy.js",
       "file": "cypress/e2e/gui/authentication/loginGUI.cy.js",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "409a6860-4897-4e50-9e2c-e00839c73f21",
+          "uuid": "8b7a8127-0767-4cc4-83c6-84224444c51e",
           "title": "Login Functionalities GUI",
           "fullFile": "",
           "file": "",
@@ -38,7 +38,7 @@
               "title": "Validate User Signup and Log in successfully",
               "fullTitle": "Login Functionalities GUI Validate User Signup and Log in successfully",
               "timedOut": null,
-              "duration": 6681,
+              "duration": 6917,
               "state": "passed",
               "speed": "medium",
               "pass": true,
@@ -47,8 +47,8 @@
               "context": "\"videos/loginGUI.cy.js.mp4\"",
               "code": "/**\n * O comando `gui_login_or_signup_and_login` já valida que o login foi realizado,\n * garantindo que a sessão foi criada corretamente.\n * \n * Por isso, este teste não precisa de assertivas adicionais.\n */\ncy.gui_login_or_signup_and_login(newUser.email, newUser.password);\n// Valida o logout\ncy.gui_logout();\ncy.url().should('include', '/login');\ncy.get('input[name=\"email\"]').should('be.visible');",
               "err": {},
-              "uuid": "4fa1c609-8d19-4efd-8712-ad58f3df1100",
-              "parentUUID": "409a6860-4897-4e50-9e2c-e00839c73f21",
+              "uuid": "efcdb80a-67f3-48a0-be13-d506869d4375",
+              "parentUUID": "8b7a8127-0767-4cc4-83c6-84224444c51e",
               "isHook": false,
               "skipped": false
             },
@@ -56,7 +56,7 @@
               "title": "Validate login throws an error when using invalid credentials",
               "fullTitle": "Login Functionalities GUI Validate login throws an error when using invalid credentials",
               "timedOut": null,
-              "duration": 1383,
+              "duration": 1556,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -65,8 +65,8 @@
               "context": "\"videos/loginGUI.cy.js.mp4\"",
               "code": "cy.validateInvalidCredentials(newUser.email, newUser.password);",
               "err": {},
-              "uuid": "a9fa1fc6-f40b-40ed-8171-13a750fc283e",
-              "parentUUID": "409a6860-4897-4e50-9e2c-e00839c73f21",
+              "uuid": "db14abac-b1ed-450b-98b0-82f83d7ede8f",
+              "parentUUID": "8b7a8127-0767-4cc4-83c6-84224444c51e",
               "isHook": false,
               "skipped": false
             },
@@ -74,7 +74,7 @@
               "title": "Validate login throws an error when using invalid email format",
               "fullTitle": "Login Functionalities GUI Validate login throws an error when using invalid email format",
               "timedOut": null,
-              "duration": 1138,
+              "duration": 1278,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -83,22 +83,22 @@
               "context": "\"videos/loginGUI.cy.js.mp4\"",
               "code": "const invalidUser = _userFactory.UserFactory.invalidEmailUser(); // Using the user with invalid email\ncy.validateInvalidEmail(invalidUser.email, newUser.password);",
               "err": {},
-              "uuid": "2dbc1cf5-0503-40c4-a161-1b13e9414016",
-              "parentUUID": "409a6860-4897-4e50-9e2c-e00839c73f21",
+              "uuid": "95cecd9e-4428-4b8a-a1c9-72b9d16535aa",
+              "parentUUID": "8b7a8127-0767-4cc4-83c6-84224444c51e",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "4fa1c609-8d19-4efd-8712-ad58f3df1100",
-            "a9fa1fc6-f40b-40ed-8171-13a750fc283e",
-            "2dbc1cf5-0503-40c4-a161-1b13e9414016"
+            "efcdb80a-67f3-48a0-be13-d506869d4375",
+            "db14abac-b1ed-450b-98b0-82f83d7ede8f",
+            "95cecd9e-4428-4b8a-a1c9-72b9d16535aa"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 9202,
+          "duration": 9751,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
@@ -114,7 +114,7 @@
       "_timeout": 2000
     },
     {
-      "uuid": "520922ff-f452-4122-a73d-1aef71a815fd",
+      "uuid": "0a2dcb6e-074c-4aab-973c-9d2992648a99",
       "title": "",
       "fullFile": "cypress/e2e/api/authentication/loginAPI.cy.js",
       "file": "cypress/e2e/api/authentication/loginAPI.cy.js",
@@ -123,7 +123,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "426a9b7c-678b-416f-bd6e-995d000afff8",
+          "uuid": "fee9081d-5f49-4b46-9447-04f837939aa5",
           "title": "Login Functionalities API",
           "fullFile": "",
           "file": "",
@@ -134,7 +134,7 @@
               "title": "Validate User Signup and Log in successfully",
               "fullTitle": "Login Functionalities API Validate User Signup and Log in successfully",
               "timedOut": null,
-              "duration": 448,
+              "duration": 575,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -143,8 +143,8 @@
               "context": "\"videos/loginAPI.cy.js.mp4\"",
               "code": "/**\n * A `api_loginAndSignUp` já faz asserções para garantir que o login ocorreu,\n * por isso esse teste não precisa de asserts extras.\n */\ncy.api_loginAndSignUp(newUser.email, newUser.password, newUser.administrador);",
               "err": {},
-              "uuid": "2bf6f085-a4df-490d-96c2-5b5ed4eab5c4",
-              "parentUUID": "426a9b7c-678b-416f-bd6e-995d000afff8",
+              "uuid": "63bec5a9-2242-4327-81b0-6f340a7e8183",
+              "parentUUID": "fee9081d-5f49-4b46-9447-04f837939aa5",
               "isHook": false,
               "skipped": false
             },
@@ -152,7 +152,7 @@
               "title": "Validate login throws an error when using invalid credentials",
               "fullTitle": "Login Functionalities API Validate login throws an error when using invalid credentials",
               "timedOut": null,
-              "duration": 263,
+              "duration": 350,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -161,8 +161,8 @@
               "context": "\"videos/loginAPI.cy.js.mp4\"",
               "code": "cy.api_login(newUser.email, newUser.password).then(response => {\n  expect(response.status).to.eq(401);\n  expect(response.body).to.deep.equal(login_401);\n});",
               "err": {},
-              "uuid": "b9748742-84d7-4891-bab5-dc27e786cb12",
-              "parentUUID": "426a9b7c-678b-416f-bd6e-995d000afff8",
+              "uuid": "92062040-3ee1-40a8-afe4-3e710e43f85e",
+              "parentUUID": "fee9081d-5f49-4b46-9447-04f837939aa5",
               "isHook": false,
               "skipped": false
             },
@@ -170,7 +170,7 @@
               "title": "Validate login throws an error when using invalid email format",
               "fullTitle": "Login Functionalities API Validate login throws an error when using invalid email format",
               "timedOut": null,
-              "duration": 201,
+              "duration": 280,
               "state": "passed",
               "speed": "fast",
               "pass": true,
@@ -179,22 +179,22 @@
               "context": "\"videos/loginAPI.cy.js.mp4\"",
               "code": "const invalidUser = _userFactory.UserFactory.invalidEmailUser(); // Using the user with invalid email\ncy.api_login(invalidUser.email, newUser.password).then(response => {\n  expect(response.status).to.eq(400);\n  expect(response.body).to.deep.equal(login_400);\n});",
               "err": {},
-              "uuid": "3ca4eb0e-19a1-444c-9fbc-1a37074f4580",
-              "parentUUID": "426a9b7c-678b-416f-bd6e-995d000afff8",
+              "uuid": "25d0042e-a9cb-4f89-83d7-15e335757399",
+              "parentUUID": "fee9081d-5f49-4b46-9447-04f837939aa5",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "2bf6f085-a4df-490d-96c2-5b5ed4eab5c4",
-            "b9748742-84d7-4891-bab5-dc27e786cb12",
-            "3ca4eb0e-19a1-444c-9fbc-1a37074f4580"
+            "63bec5a9-2242-4327-81b0-6f340a7e8183",
+            "92062040-3ee1-40a8-afe4-3e710e43f85e",
+            "25d0042e-a9cb-4f89-83d7-15e335757399"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 912,
+          "duration": 1205,
           "root": false,
           "rootEmpty": false,
           "_timeout": 2000
