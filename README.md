@@ -7,6 +7,8 @@ Sample project to experiment with [Cypress](https://cypress.io) to test the Serv
 ![Node.js](https://img.shields.io/badge/node.js-20.16.0-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
+# ⭐ If you find this project useful, please consider giving it a star to help increase its visibility.
+
 ## Table of Contents
 
 - [Pre-requirements](#pre-requirements)
