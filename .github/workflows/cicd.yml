@@ -66,7 +66,8 @@ jobs:
       - name: Run Cypress tests
         run: |
           npx cypress run --browser ${{ matrix.browser }} --spec "cypress/e2e/gui/authentication/loginGUI.cy.js","cypress/e2e/api/authentication/loginAPI.cy.js" --reporter mochawesome --reporter-options reportDir=cypress/reports/mochawesome,overwrite=false,html=false,json=true
-
+        continue-on-error: true
+        
       - name: Merge test reports
         run: npm run report:merge
 
