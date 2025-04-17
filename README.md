@@ -4,6 +4,7 @@ Sample project to experiment with [Cypress](https://cypress.io) to test the Serv
 
 [![Cypress CI/CD](https://github.com/clark-ewerton/cypress-serverest-cicd/workflows/Cypress%20CI%20CD%20Tests/badge.svg)](https://github.com/clark-ewerton/cypress-serverest-cicd/actions/workflows/cicd.yml)
 [![Pages Status](https://img.shields.io/badge/GitHub%20Pages-Online-green)](https://clark-ewerton.github.io/cypress-serverest-cicd/)
+[![Badge ServeRest](https://img.shields.io/badge/API-ServeRest-green)](https://github.com/ServeRest/ServeRest/)
 ![Node.js](https://img.shields.io/badge/node.js-20.16.0-brightgreen)
 ![License](https://img.shields.io/badge/license-MIT-blue)
 
