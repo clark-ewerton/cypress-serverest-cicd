@@ -15,27 +15,41 @@ stages:
   - stage: CleanArtifacts
     displayName: 'Clean gh-pages branch'
     jobs:
-      - job: CleanGH
-        pool:
-          vmImage: 'ubuntu-latest'
-        steps:
-          - checkout: self
-            persistCredentials: true
-            clean: false
-            fetchDepth: 0
+    - job: CleanArtifactsFromGhPages
+      displayName: 'Clean artifacts from gh-pages branch'
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+        - checkout: self
+          clean: true
+          persistCredentials: true
 
-          - script: |
-              git fetch origin gh-pages
-              git checkout gh-pages || git checkout --orphan gh-pages
+        - script: |
+            git config --global user.name "azure-pipelines[bot]"
+            git config --global user.email "azure-pipelines@dev.azure.com"
 
-              git config user.name "azure-pipelines[bot]"
-              git config user.email "azure-pipelines@bot.com"
+            git fetch origin
 
-              find . -maxdepth 1 ! -name '.git' ! -name '.' -exec rm -rf {} +
-              git add -A
-              git commit -m "Cleanup gh-pages" || echo "Nothing to commit"
+            # Verifica se a branch gh-pages existe
+            if git ls-remote --exit-code --heads origin gh-pages; then
+              echo "Branch gh-pages já existe. Fazendo checkout..."
+              git checkout gh-pages
+            else
+              echo "Branch gh-pages não existe. Criando..."
+              git checkout --orphan gh-pages
+              git rm -rf .
+              echo "Inicialização da gh-pages" > index.html
+              git add index.html
+              git commit -m "Init gh-pages"
               git push origin gh-pages
-            displayName: 'Clean and push gh-pages'
+            fi
+
+            # Limpa os arquivos da branch
+            git rm -rf . || true
+            git clean -fxd
+            git commit --allow-empty -m "Complete cleanup of gh-pages"
+            git push origin gh-pages
+          displayName: 'Verifica/cria e limpa branch gh-pages'
 
   - stage: CI
     dependsOn: CleanArtifacts
