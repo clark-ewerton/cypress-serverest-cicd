@@ -117,6 +117,9 @@ stages:
           vmImage: 'ubuntu-latest'
         steps:
           - checkout: self
+            persistCredentials: true
+            clean: true
+            fetchDepth: 0
 
           - task: DownloadBuildArtifacts@0
             inputs:
@@ -143,7 +146,8 @@ stages:
               git config user.name "azure-pipelines[bot]"
               git config user.email "azure-pipelines@bot.com"
 
-              git checkout gh-pages
+              git fetch origin
+              git checkout gh-pages || git checkout -b gh-pages origin/gh-pages
               cp -r ./public/* .
               git add .
               git commit -m "Deploy Cypress reports"
