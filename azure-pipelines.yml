@@ -30,26 +30,26 @@ stages:
 
             git fetch origin
 
-            # Verifica se a branch gh-pages existe
+            # verifies if gh-pages branch already exists
             if git ls-remote --exit-code --heads origin gh-pages; then
-              echo "Branch gh-pages já existe. Fazendo checkout..."
+              echo "gh-pages branch already exists. Perform checkout..."
               git checkout gh-pages
             else
-              echo "Branch gh-pages não existe. Criando..."
+              echo "gh-pages branch does not exist. Creating..."
               git checkout --orphan gh-pages
               git rm -rf .
-              echo "Inicialização da gh-pages" > index.html
+              echo "Initialization of gh-pages" > index.html
               git add index.html
               git commit -m "Init gh-pages"
               git push origin gh-pages
             fi
 
-            # Limpa os arquivos da branch
+            # Clean branch files
             git rm -rf . || true
             git clean -fxd
             git commit --allow-empty -m "Complete cleanup of gh-pages"
             git push origin gh-pages
-          displayName: 'Verifica/cria e limpa branch gh-pages'
+          displayName: 'Verifies/creates and clean branch gh-pages'
 
   - stage: CI
     dependsOn: CleanArtifacts
@@ -115,7 +115,7 @@ stages:
             clean: true
             fetchDepth: 0
 
-    # Baixa artefatos de AMBOS browsers (chrome e edge)
+    # Download artifacts from both browsers (chrome and edge)
           - task: DownloadBuildArtifacts@0
             inputs:
               artifactName: 'cypress-artifacts-chrome'
@@ -125,37 +125,39 @@ stages:
               artifactName: 'cypress-artifacts-edge'
               downloadPath: $(Build.SourcesDirectory)/
 
-          # Organiza os arquivos de AMBOS browsers
+          # Setup files to be pushed to gh-pages branch
           - script: |
               mkdir -p ./chrome/videos ./edge/videos
               mkdir -p ./chrome/screenshots ./edge/screenshots
-              # Copia chrome
+
+              # Copies necessary files from chrome artifact
               find ./cypress-artifacts-chrome/videos -type f -name "*.mp4" -exec cp {} ./chrome/videos/ \;
               find ./cypress-artifacts-chrome/screenshots -type f -name "*.png" -exec cp {} ./chrome/screenshots/ \;
               cp -r ./cypress-artifacts-chrome/reports/mochawesome/* ./chrome/
-              # Copia edge
+
+              # Copies necessary files from edge artifact
               find ./cypress-artifacts-edge/videos -type f -name "*.mp4" -exec cp {} ./edge/videos/ \;
               find ./cypress-artifacts-edge/screenshots -type f -name "*.png" -exec cp {} ./edge/screenshots/ \;
               cp -r ./cypress-artifacts-edge/reports/mochawesome/* ./edge/
             displayName: 'Organize artifacts'
 
-          # Gera o index.html (agora com dados de AMBOS browsers)
+          # Generates index.html (generic reports that is gonna redirect you to either chrome or edge)
           - script: |
               mkdir -p ./public
               node generate-index.js
               cp -r ./public/index.html ./
             displayName: 'Generate Index'
 
-          # Faz o deploy UMA ÚNICA VEZ (com chrome e edge juntos)
+          # Perform deploy to github Pages
           - script: |
               git config user.name "azure-pipelines[bot]"
               git config user.email "azure-pipelines@bot.com"
 
               git fetch origin gh-pages
-              git checkout gh-pages || git checkout -b gh-pages  # Usa o branch existente ou cria novo
+              git checkout gh-pages || git checkout -b gh-pages
               #git reset --hard
 
               git add -f index.html ./chrome/ ./edge/
               git commit -m "Deploy Cypress reports for ALL browsers"
-              git push origin gh-pages
+              git push origin gh-pages --force
             displayName: 'Deploy to gh-pages'
