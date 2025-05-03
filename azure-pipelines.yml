@@ -148,7 +148,7 @@ stages:
 
               git fetch origin
               git checkout gh-pages || git checkout -b gh-pages origin/gh-pages
-              cp -r ./* .
+              cp -r ./chrome ./edge ./public/index.html ./
               git add .
               git commit -m "Deploy Cypress reports"
               git push origin gh-pages
