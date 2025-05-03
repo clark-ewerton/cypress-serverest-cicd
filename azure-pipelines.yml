@@ -130,12 +130,12 @@ stages:
               mkdir -p ./chrome/videos ./edge/videos
               mkdir -p ./chrome/screenshots ./edge/screenshots
               # Copia chrome
-              cp -r ./cypress-artifacts-chrome/videos/* ./chrome/videos/
-              cp -r ./cypress-artifacts-chrome/screenshots/* ./chrome/screenshots/
+              find ./cypress-artifacts-chrome/videos -type f -name "*.mp4" -exec cp {} ./chrome/videos/ \;
+              find ./cypress-artifacts-chrome/screenshots -type f -name "*.png" -exec cp {} ./chrome/screenshots/ \;
               cp -r ./cypress-artifacts-chrome/reports/mochawesome/* ./chrome/
               # Copia edge
-              cp -r ./cypress-artifacts-edge/videos/* ./edge/videos/
-              cp -r ./cypress-artifacts-edge/screenshots/* ./edge/screenshots/
+              find ./cypress-artifacts-edge/videos -type f -name "*.mp4" -exec cp {} ./edge/videos/ \;
+              find ./cypress-artifacts-edge/screenshots -type f -name "*.png" -exec cp {} ./edge/screenshots/ \;
               cp -r ./cypress-artifacts-edge/reports/mochawesome/* ./edge/
             displayName: 'Organize artifacts'
 
