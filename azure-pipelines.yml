@@ -130,13 +130,13 @@ stages:
               mkdir -p ./chrome/videos ./edge/videos
               mkdir -p ./chrome/screenshots ./edge/screenshots
               # Copia chrome
-              cp -r ./artifacts/chrome/videos/* ./chrome/videos/
-              cp -r ./artifacts/chrome/screenshots/* ./chrome/screenshots/
-              cp -r ./artifacts/chrome/reports/mochawesome/* ./chrome/ || true
+              cp -r ./cypress-artifacts-chrome/videos/* ./chrome/videos/
+              cp -r ./cypress-artifacts-chrome/screenshots/* ./chrome/screenshots/
+              cp -r ./cypress-artifacts-chrome/reports/mochawesome/* ./chrome/
               # Copia edge
-              cp -r ./artifacts/edge/videos/* ./edge/videos/
-              cp -r ./artifacts/edge/screenshots/* ./edge/screenshots/
-              cp -r ./artifacts/edge/reports/mochawesome/* ./edge/ || true
+              cp -r ./cypress-artifacts-edge/videos/* ./edge/videos/
+              cp -r ./cypress-artifacts-edge/screenshots/* ./edge/screenshots/
+              cp -r ./cypress-artifacts-edge/reports/mochawesome/* ./edge/
             displayName: 'Organize artifacts'
 
           # Gera o index.html (agora com dados de AMBOS browsers)
