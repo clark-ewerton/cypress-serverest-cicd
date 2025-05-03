@@ -130,9 +130,15 @@ stages:
               mkdir -p ./$(browser)/videos
               mkdir -p ./$(browser)/screenshots
 
-              cp -r ./artifacts/cypress-artifacts-$(browser)/videos/**/**.mp4 ./$(browser)/videos/ || true
-              cp -r ./artifacts/cypress-artifacts-$(browser)/screenshots/**/**.png ./$(browser)/screenshots/ || true
-              cp -r ./artifacts/cypress-artifacts-$(browser)/reports/mochawesome/**.** ./$(browser)/ || true
+              # Copia os vídeos
+              find ./artifacts/cypress-artifacts-$(browser)/videos -type f -name "*.mp4" -exec cp {} ./$(browser)/videos/ \;
+
+              # Copia os screenshots
+              find ./artifacts/cypress-artifacts-$(browser)/screenshots -type f -name "*.png" -exec cp {} ./$(browser)/screenshots/ \;
+
+              # Copia os relatórios
+              cp -r ./artifacts/cypress-artifacts-$(browser)/reports/mochawesome/* ./$(browser)/mochawesome-report/ || true
+            
             displayName: 'Organize artifacts'
 
           - script: |
