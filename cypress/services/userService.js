@@ -1,5 +1,5 @@
 class UserService {
-  login(username, password, administrador) {
+  login(username, password) {
     return cy.request({
       method: 'POST',
       url: `${Cypress.env('apiBaseUrl')}/login`,
@@ -9,7 +9,6 @@ class UserService {
       body: {
         email: username,
         password: password,
-		administrador: administrador
       },
       failOnStatusCode: false
     })
@@ -69,7 +68,7 @@ class UserService {
   loginAndSignUp(username, password, administrador) {
     return cy.fixture('login_200').then((login_200) => {
       return cy.fixture('login_401').then((login_401) => {
-        return this.login(username, password, administrador).then(
+        return this.login(username, password).then(
           (response) => {
             //initially it's gonna try to use invalid credentials to login
             if (response.status === 401) {
