@@ -150,8 +150,6 @@ stages:
               git config user.email "azure-pipelines@bot.com"
 
               git fetch origin
-              # Limpa a branch antes de copiar os novos arquivos
-              git clean -fd
               git checkout gh-pages || git checkout -b gh-pages origin/gh-pages
               
               git add $(browser)/ index.html
