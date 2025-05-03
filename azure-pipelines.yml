@@ -119,11 +119,11 @@ stages:
           - task: DownloadBuildArtifacts@0
             inputs:
               artifactName: 'cypress-artifacts-chrome'
-              downloadPath: $(Build.SourcesDirectory)/artifacts/chrome
+              downloadPath: $(Build.SourcesDirectory)/
           - task: DownloadBuildArtifacts@0
             inputs:
               artifactName: 'cypress-artifacts-edge'
-              downloadPath: $(Build.SourcesDirectory)/artifacts/edge
+              downloadPath: $(Build.SourcesDirectory)/
 
           # Organiza os arquivos de AMBOS browsers
           - script: |
