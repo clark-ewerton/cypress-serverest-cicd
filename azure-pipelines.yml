@@ -138,6 +138,7 @@ stages:
             displayName: 'Organize artifacts'
 
           - script: |
+              mkdir -p ./public
               node generate-index.js
             displayName: 'Generate Index'
 
