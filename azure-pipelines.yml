@@ -132,10 +132,8 @@ stages:
 
               # Copia os vídeos
               find ./artifacts/cypress-artifacts-$(browser)/videos -type f -name "*.mp4" -exec cp {} ./$(browser)/videos/ \;
-
               # Copia os screenshots
               find ./artifacts/cypress-artifacts-$(browser)/screenshots -type f -name "*.png" -exec cp {} ./$(browser)/screenshots/ \;
-
               # Copia os relatórios
               cp -r ./artifacts/cypress-artifacts-$(browser)/reports/mochawesome/* ./$(browser)/ || true
             
@@ -160,8 +158,8 @@ stages:
 
               #cp -r deploy/* ./
               
-              git add $(browser) index.html
-              git commit -m "Deploy Cypress reports"
+              git add $(browser)/ public/index.html
+              git commit -m "Deploy Cypress reports for $(browser)"
               git push origin gh-pages
             displayName: 'Deploy to gh-pages'
 
