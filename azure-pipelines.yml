@@ -113,6 +113,7 @@ stages:
               browser: chrome
             edge:
               browser: edge
+          maxParallel: 1 # Force sequential execution
         pool:
           vmImage: 'ubuntu-latest'
         steps:
@@ -154,9 +155,8 @@ stages:
               git checkout --orphan gh-pages  # Cria um branch limpo (sem histórico pai)
               git reset --hard
 
-              # Adiciona e commita tudo
+              # Add e commit only index.html along with browsers folders
               git add -f index.html ./$(browser)/
               git commit -m "Deploy Cypress reports for $(browser) [Azure Pipelines]"
               git push origin gh-pages --force  # Força o push (comum para gh-pages)
             displayName: 'Deploy to gh-pages'
-
