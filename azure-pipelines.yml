@@ -137,7 +137,7 @@ stages:
               find ./artifacts/cypress-artifacts-$(browser)/screenshots -type f -name "*.png" -exec cp {} ./$(browser)/screenshots/ \;
 
               # Copia os relatórios
-              cp -r ./artifacts/cypress-artifacts-$(browser)/reports/mochawesome/* ./$(browser)/mochawesome-report/ || true
+              cp -r ./artifacts/cypress-artifacts-$(browser)/reports/mochawesome/* ./$(browser)/ || true
             
             displayName: 'Organize artifacts'
 
