@@ -129,12 +129,10 @@ stages:
           - script: |
               mkdir -p ./$(browser)/videos
               mkdir -p ./$(browser)/screenshots
-              mkdir -p ./$(browser)/mochawesome-report
 
-              cp -r ./artifacts/cypress/videos/* ./$(browser)/videos/ || true
-              cp -r ./artifacts/cypress/screenshots/* ./$(browser)/screenshots/ || true
-              cp -r ./artifacts/cypress/reports/mochawesome/* ./$(browser)/ || true
-              cp -r ./artifacts/cypress/mochawesome-report/* ./$(browser)/mochawesome-report/ || true
+              cp -r ./artifacts/cypress-artifacts-$(browser)/videos/**/**.mp4 ./$(browser)/videos/ || true
+              cp -r ./artifacts/cypress-artifacts-$(browser)/screenshots/**/**.png ./$(browser)/screenshots/ || true
+              cp -r ./artifacts/cypress-artifacts-$(browser)/reports/mochawesome/**.** ./$(browser)/ || true
             displayName: 'Organize artifacts'
 
           - script: |
@@ -147,8 +145,12 @@ stages:
               git config user.email "azure-pipelines@bot.com"
 
               git fetch origin
+
+              # Limpa arquivos não rastreados para evitar conflito no checkout
+              git clean -fd
+              
               git checkout gh-pages || git checkout -b gh-pages origin/gh-pages
-              cp -r ./chrome ./edge ./public/index.html ./
+              cp -r ./$(browser)/ ./public/index.html ./
               git add .
               git commit -m "Deploy Cypress reports"
               git push origin gh-pages
