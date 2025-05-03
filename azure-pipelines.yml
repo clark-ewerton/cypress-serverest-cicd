@@ -145,9 +145,6 @@ stages:
               git config user.email "azure-pipelines@bot.com"
 
               git fetch origin
-
-              # Limpa arquivos não rastreados para evitar conflito no checkout
-              git clean -fd
               
               git checkout gh-pages || git checkout -b gh-pages origin/gh-pages
               cp -r ./$(browser)/ ./public/index.html ./
