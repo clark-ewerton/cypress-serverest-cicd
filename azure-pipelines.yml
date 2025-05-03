@@ -106,14 +106,7 @@ stages:
     dependsOn: CI
     displayName: 'Publish to GitHub Pages'
     jobs:
-      - job: Deploy
-        strategy:
-          matrix:
-            chrome:
-              browser: chrome
-            edge:
-              browser: edge
-          maxParallel: 1 # Force sequential execution
+      - job: DeployAll
         pool:
           vmImage: 'ubuntu-latest'
         steps:
@@ -122,41 +115,47 @@ stages:
             clean: true
             fetchDepth: 0
 
+    # Baixa artefatos de AMBOS browsers (chrome e edge)
           - task: DownloadBuildArtifacts@0
             inputs:
-              artifactName: 'cypress-artifacts-$(browser)'
-              downloadPath: $(Build.SourcesDirectory)/artifacts
+              artifactName: 'cypress-artifacts-chrome'
+              downloadPath: $(Build.SourcesDirectory)/artifacts/chrome
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              artifactName: 'cypress-artifacts-edge'
+              downloadPath: $(Build.SourcesDirectory)/artifacts/edge
 
+          # Organiza os arquivos de AMBOS browsers
           - script: |
-              mkdir -p ./$(browser)/videos
-              mkdir -p ./$(browser)/screenshots
-
-              # Copia os vídeos
-              find ./artifacts/cypress-artifacts-$(browser)/videos -type f -name "*.mp4" -exec cp {} ./$(browser)/videos/ \;
-              # Copia os screenshots
-              find ./artifacts/cypress-artifacts-$(browser)/screenshots -type f -name "*.png" -exec cp {} ./$(browser)/screenshots/ \;
-              # Copia os relatórios
-              cp -r ./artifacts/cypress-artifacts-$(browser)/reports/mochawesome/* ./$(browser)/ || true
-            
+              mkdir -p ./chrome/videos ./edge/videos
+              mkdir -p ./chrome/screenshots ./edge/screenshots
+              # Copia chrome
+              cp -r ./artifacts/chrome/videos/* ./chrome/videos/
+              cp -r ./artifacts/chrome/screenshots/* ./chrome/screenshots/
+              cp -r ./artifacts/chrome/reports/mochawesome/* ./chrome/ || true
+              # Copia edge
+              cp -r ./artifacts/edge/videos/* ./edge/videos/
+              cp -r ./artifacts/edge/screenshots/* ./edge/screenshots/
+              cp -r ./artifacts/edge/reports/mochawesome/* ./edge/ || true
             displayName: 'Organize artifacts'
 
+          # Gera o index.html (agora com dados de AMBOS browsers)
           - script: |
               mkdir -p ./public
               node generate-index.js
               cp -r ./public/index.html ./
             displayName: 'Generate Index'
-          
+
+          # Faz o deploy UMA ÚNICA VEZ (com chrome e edge juntos)
           - script: |
               git config user.name "azure-pipelines[bot]"
               git config user.email "azure-pipelines@bot.com"
 
-              # Força a criação/reset do branch gh-pages
               git fetch origin gh-pages || true
-              git checkout --orphan gh-pages  # Cria um branch limpo (sem histórico pai)
+              git checkout --orphan gh-pages
               git reset --hard
 
-              # Add e commit only index.html along with browsers folders
-              git add -f index.html ./$(browser)/
-              git commit -m "Deploy Cypress reports for $(browser) [Azure Pipelines]"
-              git push origin gh-pages --force  # Força o push (comum para gh-pages)
+              git add -f index.html ./chrome/ ./edge/
+              git commit -m "Deploy Cypress reports for ALL browsers"
+              git push origin gh-pages
             displayName: 'Deploy to gh-pages'
