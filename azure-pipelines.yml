@@ -142,6 +142,7 @@ stages:
           - script: |
               mkdir -p ./public
               node generate-index.js
+              cp -r ./public/index.html ./
             displayName: 'Generate Index'
           
           - script: |
@@ -149,16 +150,11 @@ stages:
               git config user.email "azure-pipelines@bot.com"
 
               git fetch origin
-              git checkout gh-pages || git checkout -b gh-pages origin/gh-pages
-
               # Limpa a branch antes de copiar os novos arquivos
-              #mkdir deploy
-              #cp -r ./$(browser) deploy/
-              #cp ./public/index.html deploy/
-
-              #cp -r deploy/* ./
+              git clean -fd
+              git checkout gh-pages || git checkout -b gh-pages origin/gh-pages
               
-              git add $(browser)/ public/index.html
+              git add $(browser)/ index.html
               git commit -m "Deploy Cypress reports for $(browser)"
               git push origin gh-pages
             displayName: 'Deploy to gh-pages'
