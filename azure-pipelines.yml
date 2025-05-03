@@ -127,18 +127,17 @@ stages:
               downloadPath: $(Build.SourcesDirectory)/artifacts
 
           - script: |
-              mkdir -p ./public/$(browser)/videos
-              mkdir -p ./public/$(browser)/screenshots
-              mkdir -p ./public/$(browser)/mochawesome-report
+              mkdir -p ./$(browser)/videos
+              mkdir -p ./$(browser)/screenshots
+              mkdir -p ./$(browser)/mochawesome-report
 
-              cp -r ./artifacts/cypress/videos/* ./public/$(browser)/videos/ || true
-              cp -r ./artifacts/cypress/screenshots/* ./public/$(browser)/screenshots/ || true
-              cp -r ./artifacts/cypress/reports/mochawesome/* ./public/$(browser)/ || true
-              cp -r ./artifacts/cypress/mochawesome-report/* ./public/$(browser)/mochawesome-report/ || true
+              cp -r ./artifacts/cypress/videos/* ./$(browser)/videos/ || true
+              cp -r ./artifacts/cypress/screenshots/* ./$(browser)/screenshots/ || true
+              cp -r ./artifacts/cypress/reports/mochawesome/* ./$(browser)/ || true
+              cp -r ./artifacts/cypress/mochawesome-report/* ./$(browser)/mochawesome-report/ || true
             displayName: 'Organize artifacts'
 
           - script: |
-              mkdir -p ./public
               node generate-index.js
             displayName: 'Generate Index'
 
@@ -148,7 +147,7 @@ stages:
 
               git fetch origin
               git checkout gh-pages || git checkout -b gh-pages origin/gh-pages
-              cp -r ./public/* .
+              cp -r ./* .
               git add .
               git commit -m "Deploy Cypress reports"
               git push origin gh-pages
