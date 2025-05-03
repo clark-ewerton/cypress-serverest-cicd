@@ -146,14 +146,14 @@ stages:
             displayName: 'Generate Index'
           
           - script: |
-              git config user.name "azure-pipelines[bot]"
-              git config user.email "azure-pipelines@bot.com"
+              # Força a criação/reset do branch gh-pages
+              git fetch origin gh-pages || true
+              git checkout --orphan gh-pages  # Cria um branch limpo (sem histórico pai)
+              git reset --hard
 
-              git fetch origin
-              git checkout gh-pages || git checkout -b gh-pages origin/gh-pages
-              
-              git add $(browser)/ index.html
-              git commit -m "Deploy Cypress reports for $(browser)"
-              git push origin gh-pages
+              # Adiciona e commita tudo
+              git add -f index.html ./$(browser)/
+              git commit -m "Deploy Cypress reports for $(browser) [Azure Pipelines]"
+              git push origin gh-pages --force  # Força o push (comum para gh-pages)
             displayName: 'Deploy to gh-pages'
 
