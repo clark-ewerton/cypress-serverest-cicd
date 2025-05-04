@@ -155,7 +155,6 @@ stages:
 
               git fetch origin gh-pages
               git checkout gh-pages || git checkout -b gh-pages
-              #git reset --hard
 
               git add -f index.html ./chrome/ ./edge/
               git commit -m "Deploy Cypress reports for ALL browsers"
