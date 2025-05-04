@@ -1,4 +1,4 @@
-# Project to demonstrate knowledge in Cypress + Design Patterns + CI/CD (Github Actions and Pages) + Mochawesome Reports + Multiple Browsers
+# Project to demonstrate knowledge in Cypress + Design Patterns + CI/CD (Github Actions/Pages and Azure Devops) + Mochawesome Reports + Multiple Browsers
 
 Sample project to experiment with [Cypress](https://cypress.io) to test the ServeRest app along with CI/CD using GitHub Actions and Pages.
 
@@ -137,6 +137,8 @@ npm test
 ## CI/CD Pipeline
 
 This project uses **GitHub Actions** to run tests automatically on every push or pull request. The whole code can be found here: `cypress/workflows/cypress.yml`
+
+It also uses **Azure Devops** as a pipeline to run the same tests. The whole code can be found here: `azure-pipelines.yml`
 
 In this project CI is responsible for compile, build and run e2e automated test.
 
