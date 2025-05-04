@@ -159,5 +159,5 @@ stages:
 
               git add -f index.html ./chrome/ ./edge/
               git commit -m "Deploy Cypress reports for ALL browsers"
-              git push origin gh-pages --force
+              git push origin gh-pages
             displayName: 'Deploy to gh-pages'
